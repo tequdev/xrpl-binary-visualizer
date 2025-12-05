@@ -193,7 +193,11 @@ div#errormsg {
                 return response.json();
             })
             .then(function(jsonResponse) {
-                defs = jsonResponse;
+                if (Object.keys(jsonResponse).length == 1 && jsonResponse.result) {
+                  defs = jsonResponse.result
+                } else {
+                  defs = jsonResponse;
+                }
                 process_defs();
             }).catch(e=>{
                 console.log(e);
