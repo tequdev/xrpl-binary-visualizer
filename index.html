@@ -6,7 +6,7 @@ Date: 6 October 2020
 -->
 <html>
     <head>
-        <title>XRPL Binary Visualizer</title>
+        <title>Xahau Binary Visualizer</title>
 
 <style>
 body {
@@ -549,16 +549,16 @@ div#errormsg {
                             if (r.length == 1) r = '0' + r;
 
                             print_explain_payload_special(hexaccum, "Flags", out, undefined,
-                            '<span style="color:blue;">Bit </span>0 <small style="color:orange;">(XRP Bit)</small> '+
+                            '<span style="color:blue;">Bit </span>0 <small style="color:orange;">(XAH Bit)</small> '+
                             '1 <small style="color:orange;">(Sign Bit + Positve)</small> ' +
                             r + ' <small style="color:orange;">(First bits of drops integer)</small>'
                             );
                             hexaccum = ""
                         } else if (to_accumulate == 0)
                         {
-                            print_explain_payload_special(hexaccum, "XRP Drops", out, undefined,
+                            print_explain_payload_special(hexaccum, "XAH Drops", out, undefined,
                              '<span style="color:blue;">Dec </span>' + (mantissa_carry + parseInt(hexaccum, 16))+
-                                    ' <small style="color:orange;">(XRP Drops including two bits above)</small>'
+                                    ' <small style="color:orange;">(XAH Drops including two bits above)</small>'
                             );
                             amount_type = -1;
                             state = 0;
@@ -1228,7 +1228,7 @@ div#errormsg {
     </script>
     </head>
     <body>
-        <textarea onchange="run(0, false)" rows="5" class="tainput" placeholder="Paste your Rippled/XRPL related HEX/json/base64 here then click outside the box to decode."></textarea>
+        <textarea onchange="run(0, false)" rows="5" class="tainput" placeholder="Paste your Xahau/XRPL related HEX/json/base64 here then click outside the box to decode."></textarea>
         <div id="errormsg"></div>
     <div class="output">
     </div>
