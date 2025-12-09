@@ -188,7 +188,7 @@ div#errormsg {
 
         function getDefJson(url)
         {
-            fetch(url === undefined || (''+url).trim() == '' ? 'def.json' : strip(url))
+            fetch(url === undefined || (''+url).trim() == '' ? 'https://xahau.network/server_definitions.json' : strip(url))
             .then(function(response) {
                 return response.json();
             })
