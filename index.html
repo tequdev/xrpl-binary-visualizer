@@ -969,6 +969,22 @@ div#errormsg {
                     continue;
                 }
 
+                if (state == 260)
+                {
+                    // currency
+                    hexaccum += inp[i]
+                    if (--to_accumulate == 0)
+                    {
+                        const isNative = hexaccum === '00'.repeat(20);
+                        const currency = isNative ? 'XAH' :
+                                     String.fromCharCode(parseInt(hexaccum.slice(24,26), 16)) +
+                                     String.fromCharCode(parseInt(hexaccum.slice(26,28), 16)) +
+                                     String.fromCharCode(parseInt(hexaccum.slice(28,30), 16));
+                        print_explain_payload_special(hexaccum, "currency", out, undefined, currency);
+                        state = 0;
+                    }
+                    continue;
+                }
 
                 if (state == 5) {
 
@@ -992,6 +1008,11 @@ div#errormsg {
                     else if (st_type == 25) {
                         to_accumulate = 42;
                         state = 250
+                        continue
+                    }
+                    else if (st_type == 26) {
+                        to_accumulate = 40;
+                        state = 260
                         continue
                     }
                     else if (st_type == 7) {
