@@ -1,6 +1,6 @@
 import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
-import { buildTypeLookup, type Definitions } from "../src/definitions.ts";
+import { type Definitions, toParseDefs } from "../src/definitions.ts";
 import { classifyInput } from "../src/input.ts";
 import { parse, type Row } from "../src/parser.ts";
 
@@ -12,7 +12,6 @@ type Golden = {
 };
 
 const load = <T>(rel: string): T => JSON.parse(readFileSync(new URL(rel, import.meta.url), "utf8"));
-const toParseDefs = (defs: Definitions) => ({ types: defs.TYPES, lookup: buildTypeLookup(defs) });
 
 // Each fixture was captured from the legacy index.html DOM with the paired definitions.
 const suites: [string, Record<string, Golden>, Definitions][] = [
@@ -41,6 +40,8 @@ const breakdownText = (row: Row) =>
 
 describe.each(suites)("%s", (_title, golden, defs) => {
   const parseDefs = toParseDefs(defs);
+  // Golden files are legacy captures with hard-coded XRP/XAH; the parser now prints native_currency_code || "XRP".
+  const legacy = (s: string) => strip(s.replace(/(XRP|XAH)\b/g, parseDefs.native));
   for (const [name, c] of Object.entries(golden)) {
     it(name, () => {
       const input = classifyInput(c.input);
@@ -52,12 +53,12 @@ describe.each(suites)("%s", (_title, golden, defs) => {
       if (input.rewritten) expect(input.hex).toBe(c.textarea);
 
       const { rows, status } = parse(input.hex, parseDefs);
-      expect(strip(status.message)).toBe(strip(c.status));
+      expect(strip(status.message)).toBe(legacy(c.status));
       expect(rows.length).toBe(c.rows.length);
       rows.forEach((row, n) => {
         const g = c.rows[n];
-        expect(strip(row.label), `row ${n} label`).toBe(strip(g.left));
-        expect(strip(row.hex + breakdownText(row)), `row ${n} right`).toBe(strip(g.right));
+        expect(strip(row.label), `row ${n} label`).toBe(legacy(g.left));
+        expect(strip(row.hex + breakdownText(row)), `row ${n} right`).toBe(legacy(g.right));
         expect(row.indent, `row ${n} indent`).toBe(g.indent);
       });
     });

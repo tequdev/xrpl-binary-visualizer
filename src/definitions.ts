@@ -1,3 +1,5 @@
+import type { ParseDefs } from "./parser.ts";
+
 export type FieldInfo = {
   nth: number;
   type: string;
@@ -8,6 +10,7 @@ export type FieldInfo = {
 export type Definitions = {
   TYPES: Record<string, number>;
   FIELDS: [string, FieldInfo][];
+  native_currency_code?: string;
 };
 
 export type TypeLookup = Record<
@@ -26,6 +29,13 @@ export function buildTypeLookup(defs: Definitions): TypeLookup {
   }
   return lookup;
 }
+
+/** Shape the parser consumes; the native asset code falls back to XRP. */
+export const toParseDefs = (defs: Definitions): ParseDefs => ({
+  types: defs.TYPES,
+  lookup: buildTypeLookup(defs),
+  native: defs.native_currency_code ?? "XRP",
+});
 
 export async function loadDefinitions(url?: string): Promise<Definitions> {
   const res = await fetch(url === undefined || url.trim() === "" ? DEFAULT_DEFINITIONS_URL : url);

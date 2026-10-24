@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { buildTypeLookup, loadDefinitions } from "./definitions.ts";
+import { loadDefinitions, toParseDefs } from "./definitions.ts";
 import { BASE64_RE, classifyInput, HEX_RE } from "./input.ts";
 import { type ParseResult, parse, type Row, type Status } from "./parser.ts";
 
@@ -119,7 +119,7 @@ export function App() {
     loadDefinitions(url)
       .then((d) => {
         if (cancelled) return;
-        setDefs({ types: d.TYPES, lookup: buildTypeLookup(d) });
+        setDefs(toParseDefs(d));
         setDefsState("ready");
       })
       .catch((e) => {
