@@ -65,7 +65,7 @@ function Breakdown({ parts }: { parts: NonNullable<Row["breakdown"]> }) {
         return (
           <span key={key}>
             {i === 0 && !p.note && parts.length > 1 ? (
-              <span className="label">{p.text} </span>
+              <span className="part">{p.text} </span>
             ) : (
               <>{p.text} </>
             )}
@@ -77,23 +77,18 @@ function Breakdown({ parts }: { parts: NonNullable<Row["breakdown"]> }) {
   );
 }
 
-const CLASSES: Record<Row["kind"], { row: string; left: string; right: string }> = {
-  type: { row: "type", left: "typetext left", right: "typehex right" },
-  field: { row: "field", left: "fieldtext left", right: "fieldhex right" },
-  explain: { row: "explain", left: "explaintext left", right: "explainhex right" },
-  explainPayload: { row: "explain", left: "explaintext left", right: "payloadhex right" },
-  special: { row: "explain", left: "explaintext left", right: "payloadhex right" },
-  payload: { row: "payload", left: "payloadtext left", right: "payloadhex right" },
-  error: { row: "invalid", left: "invalid left", right: "invalid right" },
+const KICKERS: Partial<Record<Row["kind"], string>> = {
+  type: "Type-code",
+  field: "Field-code",
+  payload: "Field-contents",
 };
 
 function RowView({ row }: { row: Row }) {
-  const c = CLASSES[row.kind];
-  const bold = row.kind === "type" || row.kind === "field";
   return (
-    <div className={`row ${c.row}`} style={{ marginLeft: `${row.indent}em` }}>
-      <div className={c.left}>{bold ? <b>{row.label}</b> : row.label || "\u00a0"}</div>
-      <div className={c.right}>
+    <div className={`row ${row.kind}`} style={{ marginLeft: `${row.indent}em` }}>
+      <div className="kicker">{KICKERS[row.kind]}</div>
+      <div className="lbl">{row.label}</div>
+      <div className="hex">
         {row.hex}
         {row.breakdown ? <Breakdown parts={row.breakdown} /> : null}
       </div>
@@ -101,24 +96,37 @@ function RowView({ row }: { row: Row }) {
   );
 }
 
+const STATUS_CLASS: Partial<Record<Status["kind"], string>> = {
+  good: "callout-good",
+  bad: "x-callout-error",
+  ugly: "x-callout-error",
+  info: "x-callout-warn",
+};
+
 export function App() {
   const [defs, setDefs] = useState<ParseDefs | null>(null);
   const [text, setText] = useState("");
   const [stack, setStack] = useState<string[]>([]);
   const [status, setStatus] = useState<Status>({ kind: "clear", message: "" });
   const [view, setView] = useState<View>({ kind: "none" });
+  const [defsState, setDefsState] = useState<"loading" | "ready" | "error">("loading");
   const focusedWith = useRef("");
+  const defsUrl = window.location.search.slice(1);
 
   useEffect(() => {
     let cancelled = false;
     const url = window.location.search.slice(1);
     loadDefinitions(url)
       .then((d) => {
-        if (!cancelled) setDefs({ types: d.TYPES, lookup: buildTypeLookup(d) });
+        if (cancelled) return;
+        setDefs({ types: d.TYPES, lookup: buildTypeLookup(d) });
+        setDefsState("ready");
       })
       .catch((e) => {
         console.log(e);
-        if (!cancelled) setStatus({ kind: "ugly", message: `Could not load: ${url}` });
+        if (cancelled) return;
+        setDefsState("error");
+        setStatus({ kind: "ugly", message: `Could not load: ${url}` });
       });
     return () => {
       cancelled = true;
@@ -163,49 +171,108 @@ export function App() {
     if (v !== undefined) decode(v, stack.slice(0, -1));
   };
 
-  const showBanner = status.message !== "" || stack.length > 0;
+  const rows = view.kind === "rows" ? view.rows : null;
+  const statusClass = STATUS_CLASS[status.kind];
+  const dot = { loading: "x-dot-wait", ready: "x-dot-live", error: "" }[defsState];
+  const defsLabel = {
+    loading: "Loading definitions…",
+    ready: `Definitions: ${defsUrl.trim() === "" ? "xahau.network" : defsUrl}`,
+    error: "Definitions failed to load",
+  }[defsState];
 
   return (
     <>
-      <textarea
-        rows={5}
-        className="tainput"
-        data-kind={status.kind}
-        placeholder="Paste your Xahau/XRPL related HEX/json/base64 here then click outside the box to decode."
-        value={text}
-        onChange={(e) => setText(e.target.value)}
-        onFocus={(e) => {
-          focusedWith.current = e.target.value;
-        }}
-        // legacy used onchange: only decode when the value changed since focus
-        onBlur={(e) => {
-          if (e.target.value !== focusedWith.current) decode(e.target.value, []);
-        }}
-      />
-      {showBanner ? (
-        <div id="errormsg" data-kind={status.kind}>
-          {status.message}
-          {status.message ? " " : null}
-          {stack.length > 0 ? (
-            <button type="button" className="clickable" onClick={up}>
-              Go up
-            </button>
-          ) : null}
+      <header className="x-topbar">
+        <div className="x-container x-topbar-row">
+          <h1 className="x-brand">Xahau Binary Visualizer</h1>
+          <a
+            className="x-btn x-btn-secondary"
+            href="https://github.com/tequdev/xrpl-binary-visualizer"
+          >
+            GitHub
+          </a>
         </div>
-      ) : null}
-      <div className="output">
-        {view.kind === "json" ? (
-          <div className="json">
-            <JsonValue v={view.value} level={0} pick={pick} />
-          </div>
-        ) : null}
-        {view.kind === "rows"
-          ? view.rows.map((row, i) => (
-              // biome-ignore lint/suspicious/noArrayIndexKey: rows are static and never reordered
-              <RowView key={i} row={row} />
-            ))
-          : null}
-      </div>
+      </header>
+      <main className="x-container">
+        <p className="intro">
+          Paste a Xahau / XRPL hex blob, base64 or JSON and see how the STObject is decoded, field
+          by field.
+        </p>
+        <div className="x-stack">
+          <section className="x-card">
+            <div className="x-card-head">
+              <h2>Input</h2>
+              <span className="x-state">
+                <span className={`x-dot ${dot}`} />
+                {defsLabel}
+              </span>
+            </div>
+            <div className="x-card-body input-body">
+              <label>
+                <span className="x-label">Hex / base64 / JSON</span>
+                <textarea
+                  className="x-input tainput"
+                  placeholder="Paste your Xahau/XRPL related HEX/json/base64 here then click outside the box to decode."
+                  value={text}
+                  onChange={(e) => setText(e.target.value)}
+                  onFocus={(e) => {
+                    focusedWith.current = e.target.value;
+                  }}
+                  // legacy used onchange: only decode when the value changed since focus
+                  onBlur={(e) => {
+                    if (e.target.value !== focusedWith.current) decode(e.target.value, []);
+                  }}
+                />
+              </label>
+              <div className="actions">
+                <button type="button" className="x-btn" onClick={() => decode(text, stack)}>
+                  Decode
+                </button>
+                {stack.length > 0 ? (
+                  <button type="button" className="x-btn x-btn-secondary" onClick={up}>
+                    Go up
+                  </button>
+                ) : null}
+              </div>
+              {statusClass && status.message ? (
+                <div className={`status ${statusClass}`} role="status">
+                  {status.message}
+                </div>
+              ) : null}
+            </div>
+          </section>
+          <section className="x-card">
+            <div className="x-card-head">
+              <h2>Decoded</h2>
+              {rows?.length ? (
+                <span className="x-badge x-badge-glass">{rows.length} rows</span>
+              ) : null}
+            </div>
+            <div className="x-card-body">
+              {view.kind === "none" ? (
+                <div className="x-box muted">The decoded fields appear here.</div>
+              ) : null}
+              {view.kind === "json" ? (
+                <div className="x-box json">
+                  <JsonValue v={view.value} level={0} pick={pick} />
+                </div>
+              ) : null}
+              {rows ? (
+                <div className="rows">
+                  {rows.map((row, i) => (
+                    // biome-ignore lint/suspicious/noArrayIndexKey: rows are static and never reordered
+                    <RowView key={i} row={row} />
+                  ))}
+                </div>
+              ) : null}
+            </div>
+          </section>
+        </div>
+        <footer className="x-footer">
+          Xahau Binary Visualizer · <a href="https://xahau.network">xahau.network</a> · Original by{" "}
+          <a href="https://github.com/RichardAH/xrpl-binary-visualizer">Richard Holland</a>
+        </footer>
+      </main>
     </>
   );
 }

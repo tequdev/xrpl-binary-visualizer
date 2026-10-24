@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@tequdev/xahau-design-system':
+        specifier: github:tequdev/xahau-design-system
+        version: https://codeload.github.com/tequdev/xahau-design-system/tar.gz/8594442aec3d6d3dc46e4593a37d5f83b893ce05
       react:
         specifier: ^19.2.1
         version: 19.3.1
@@ -498,6 +501,10 @@ packages:
 
   '@standard-schema/spec@1.1.0':
     resolution: {integrity: sha512-l2aFy5jALhniG5HgqrD6jXLi/rUWrKvqN/qJx6yoJsgKhblVd+iqqU4RCXavm/jPityDo5TCvKMnpjKnOriy0w==}
+
+  '@tequdev/xahau-design-system@https://codeload.github.com/tequdev/xahau-design-system/tar.gz/8594442aec3d6d3dc46e4593a37d5f83b893ce05':
+    resolution: {tarball: https://codeload.github.com/tequdev/xahau-design-system/tar.gz/8594442aec3d6d3dc46e4593a37d5f83b893ce05}
+    version: 0.1.0
 
   '@types/babel__core@7.20.5':
     resolution: {integrity: sha512-qoQprZvz5wQFJwMDqeseRXWv3rqMvhgpbXFfVyWhbx9X47POIA6i/+dXefEmZKoAgOaTdaIgNSMqMIU61yRyzA==}
@@ -1182,6 +1189,8 @@ snapshots:
     optional: true
 
   '@standard-schema/spec@1.1.0': {}
+
+  '@tequdev/xahau-design-system@https://codeload.github.com/tequdev/xahau-design-system/tar.gz/8594442aec3d6d3dc46e4593a37d5f83b893ce05': {}
 
   '@types/babel__core@7.20.5':
     dependencies:
