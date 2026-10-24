@@ -1,0 +1,162 @@
+{
+  "stcurrency_xah": {
+    "input": "011A0000000000000000000000000000000000000000",
+    "rows": [
+      {
+        "left": "type uncommon",
+        "right": "0",
+        "indent": 0
+      },
+      {
+        "left": "BaseAsset",
+        "right": "1",
+        "indent": 0
+      },
+      {
+        "left": "CURRENCY",
+        "right": "1A",
+        "indent": 0
+      },
+      {
+        "left": "currency",
+        "right": "0000000000000000000000000000000000000000XAH",
+        "indent": 0
+      }
+    ],
+    "status": "Looks like a valid STObject.",
+    "textarea": "011A0000000000000000000000000000000000000000"
+  },
+  "stcurrency_usd": {
+    "input": "011A0000000000000000000000005553440000000000",
+    "rows": [
+      {
+        "left": "type uncommon",
+        "right": "0",
+        "indent": 0
+      },
+      {
+        "left": "BaseAsset",
+        "right": "1",
+        "indent": 0
+      },
+      {
+        "left": "CURRENCY",
+        "right": "1A",
+        "indent": 0
+      },
+      {
+        "left": "currency",
+        "right": "0000000000000000000000005553440000000000USD",
+        "indent": 0
+      }
+    ],
+    "status": "Looks like a valid STObject.",
+    "textarea": "011A0000000000000000000000005553440000000000"
+  },
+  "stissue_xah": {
+    "input": "03180000000000000000000000000000000000000000",
+    "rows": [
+      {
+        "left": "type uncommon",
+        "right": "0",
+        "indent": 0
+      },
+      {
+        "left": "Asset",
+        "right": "3",
+        "indent": 0
+      },
+      {
+        "left": "ISSUE",
+        "right": "18",
+        "indent": 0
+      },
+      {
+        "left": "currency",
+        "right": "0000000000000000000000000000000000000000",
+        "indent": 0
+      }
+    ],
+    "status": "Looks like a valid STObject.",
+    "textarea": "03180000000000000000000000000000000000000000"
+  },
+  "stissue_usd": {
+    "input": "0318000000000000000000000000555344000000000093B89AFCAD4C8EAC2B131C1331FEF12AE1522BBE",
+    "rows": [
+      {
+        "left": "type uncommon",
+        "right": "0",
+        "indent": 0
+      },
+      {
+        "left": "Asset",
+        "right": "3",
+        "indent": 0
+      },
+      {
+        "left": "ISSUE",
+        "right": "18",
+        "indent": 0
+      },
+      {
+        "left": "currency",
+        "right": "0000000000000000000000005553440000000000",
+        "indent": 0
+      },
+      {
+        "left": "issuer",
+        "right": "93B89AFCAD4C8EAC2B131C1331FEF12AE1522BBE",
+        "indent": 0
+      }
+    ],
+    "status": "Looks like a valid STObject.",
+    "textarea": "0318000000000000000000000000555344000000000093B89AFCAD4C8EAC2B131C1331FEF12AE1522BBE"
+  },
+  "xchainbridge": {
+    "input": "01191493B89AFCAD4C8EAC2B131C1331FEF12AE1522BBE00000000000000000000000055534400000000001493B89AFCAD4C8EAC2B131C1331FEF12AE1522BBE1493B89AFCAD4C8EAC2B131C1331FEF12AE1522BBE0000000000000000000000000000000000000000",
+    "rows": [
+      {
+        "left": "type uncommon",
+        "right": "0",
+        "indent": 0
+      },
+      {
+        "left": "XChainBridge",
+        "right": "1",
+        "indent": 0
+      },
+      {
+        "left": "XCHAINBRIDGE",
+        "right": "19",
+        "indent": 0
+      },
+      {
+        "left": "locking chain door",
+        "right": "1493B89AFCAD4C8EAC2B131C1331FEF12AE1522BBE",
+        "indent": 0
+      },
+      {
+        "left": "locking chain currency",
+        "right": "0000000000000000000000005553440000000000",
+        "indent": 0
+      },
+      {
+        "left": "locking chain issuer",
+        "right": "1493B89AFCAD4C8EAC2B131C1331FEF12AE1522BBE",
+        "indent": 0
+      },
+      {
+        "left": "issuing chain door",
+        "right": "1493B89AFCAD4C8EAC2B131C1331FEF12AE1522BBE",
+        "indent": 0
+      },
+      {
+        "left": "issuing chain currency",
+        "right": "0000000000000000000000000000000000000000",
+        "indent": 0
+      }
+    ],
+    "status": "Looks like a valid STObject.",
+    "textarea": "01191493B89AFCAD4C8EAC2B131C1331FEF12AE1522BBE00000000000000000000000055534400000000001493B89AFCAD4C8EAC2B131C1331FEF12AE1522BBE1493B89AFCAD4C8EAC2B131C1331FEF12AE1522BBE0000000000000000000000000000000000000000"
+  }
+}

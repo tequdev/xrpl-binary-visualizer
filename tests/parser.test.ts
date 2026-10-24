@@ -11,19 +11,21 @@ type Golden = {
   textarea: string;
 };
 
-const golden: Record<string, Golden> = JSON.parse(
-  readFileSync(new URL("./legacy-golden.json", import.meta.url), "utf8")
-);
-const defs: Definitions = JSON.parse(
-  readFileSync(new URL("../public/def.json", import.meta.url), "utf8")
-);
-const parseDefs = { types: defs.TYPES, lookup: buildTypeLookup(defs) };
+const load = <T>(rel: string): T => JSON.parse(readFileSync(new URL(rel, import.meta.url), "utf8"));
+const toParseDefs = (defs: Definitions) => ({ types: defs.TYPES, lookup: buildTypeLookup(defs) });
+
+// Each fixture was captured from the legacy index.html DOM with the paired definitions.
+const suites: [string, Record<string, Golden>, Definitions][] = [
+  ["legacy golden (def.json)", load("./legacy-golden.json"), load("../public/def.json")],
+  ["legacy golden (xahau types)", load("./legacy-golden-xahau.json"), load("./xahau-defs.json")],
+];
 
 const strip = (s: string) => s.replace(/[\s\0]+/g, "");
 const breakdownText = (row: Row) =>
   (row.breakdown ?? []).map((p) => p.text + (p.note ? `(${p.note})` : "")).join(" ");
 
-describe("legacy golden", () => {
+describe.each(suites)("%s", (_title, golden, defs) => {
+  const parseDefs = toParseDefs(defs);
   for (const [name, c] of Object.entries(golden)) {
     it(name, () => {
       const input = classifyInput(c.input);

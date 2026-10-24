@@ -807,7 +807,7 @@ export function parse(hex: string, defs: ParseDefs): ParseResult {
       "Parser did not complete cleanly" +
         indent_info +
         (unknown_detected ? " and unknown fields were detected" : "") +
-        "...\nby the way this " +
+        " ...\nby the way this " +
         (up[0] === "E" && up[1] === "D" && len === 66
           ? "is definitely a public key not an STObject"
           : len === 66
