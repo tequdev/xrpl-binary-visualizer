@@ -17,6 +17,11 @@ const toParseDefs = (defs: Definitions) => ({ types: defs.TYPES, lookup: buildTy
 // Each fixture was captured from the legacy index.html DOM with the paired definitions.
 const suites: [string, Record<string, Golden>, Definitions][] = [
   ["legacy golden (def.json)", load("./legacy-golden.json"), load("../public/def.json")],
+  [
+    "legacy golden extra (def.json)",
+    load("./legacy-golden-extra.json"),
+    load("../public/def.json"),
+  ],
   ["legacy golden (xahau types)", load("./legacy-golden-xahau.json"), load("./xahau-defs.json")],
 ];
 
