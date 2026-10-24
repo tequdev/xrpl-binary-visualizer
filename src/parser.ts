@@ -24,7 +24,12 @@ export type StatusKind = "clear" | "good" | "bad" | "ugly" | "info";
 export type Status = { kind: StatusKind; message: string };
 export type ParseResult = { rows: Row[]; status: Status };
 
-export type ParseDefs = { types: Record<string, number>; lookup: TypeLookup };
+export type ParseDefs = {
+  types: Record<string, number>;
+  lookup: TypeLookup;
+  /** Native asset code shown in Amount/Currency rows (e.g. XRP, XAH). */
+  native: string;
+};
 
 /** Serialized type codes. */
 const TYPE = {
@@ -68,11 +73,11 @@ const FIXED_NIBBLES: Record<number, number> = {
   [TYPE.Hash256]: bytes(32),
 };
 
-const XRP_AMOUNT_NIBBLES = bytes(8);
+const NATIVE_AMOUNT_NIBBLES = bytes(8);
 // IOU amount = 48 bytes: 3 nibbles flags+exponent, 13 mantissa, 40 currency, 40 issuer
 const IOU_FLAGS_EXPONENT_NIBBLES = 3;
 const IOU_MANTISSA_NIBBLES = 13;
-const NOT_XRP_BIT = 8; // bit 3 of the first nibble
+const NOT_NATIVE_BIT = 8; // bit 3 of the first nibble
 const EXPONENT_BIAS = 97;
 const CURRENCY_NIBBLES = bytes(20);
 const ACCOUNT_NIBBLES = bytes(20);
@@ -274,20 +279,20 @@ export function parse(hex: string, defs: ParseDefs): ParseResult {
 
   function readAmount() {
     const first = r.nibble();
-    if ((first.value & NOT_XRP_BIT) === 0) {
+    if ((first.value & NOT_NATIVE_BIT) === 0) {
       const carry = first.value & 0x3;
       push("special", "Flags", first.hex, [
         { text: "Bit" },
-        { text: "0", note: "XAH Bit" },
+        { text: "0", note: `${defs.native} Bit` },
         { text: "1", note: "Sign Bit + Positve" },
         { text: carry.toString(2).padStart(2, "0"), note: "First bits of drops integer" },
       ]);
-      const drops = r.take(XRP_AMOUNT_NIBBLES - 1);
-      push("special", "XAH Drops", drops, [
+      const drops = r.take(NATIVE_AMOUNT_NIBBLES - 1);
+      push("special", `${defs.native} Drops`, drops, [
         { text: "Dec" },
         {
           text: String(carry + parseInt(drops, 16)),
-          note: "XAH Drops including two bits above",
+          note: `${defs.native} Drops including two bits above`,
         },
       ]);
       return;
@@ -300,7 +305,7 @@ export function parse(hex: string, defs: ParseDefs): ParseResult {
     const exponent = exponentNum.toString(2).padStart(8, "0");
     push("special", "Flags + Exponent", head, [
       { text: "Bit" },
-      { text: "1", note: "Not XRP Bit" },
+      { text: "1", note: `Not ${defs.native} Bit` },
       { text: String(bits & 1), note: bits & 1 ? "Sign Bit + Positive" : "Sign Bit - Negative" },
       {
         text: exponent,
@@ -343,7 +348,7 @@ export function parse(hex: string, defs: ParseDefs): ParseResult {
 
   function readCurrency() {
     const h = r.take(CURRENCY_NIBBLES);
-    const text = h === ZERO_CURRENCY ? "XAH" : asciiCode(h);
+    const text = h === ZERO_CURRENCY ? defs.native : asciiCode(h);
     push("special", "currency", h, [{ text }]);
   }
 
