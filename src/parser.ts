@@ -4,9 +4,9 @@ Author: Richard Holland
 Date: 6 October 2020
 */
 
-// Ported from the single-file legacy index.html. The state machine in parse() is deliberately a
-// verbatim if-chain: several states (4->5, 61->5, 31->5, 23->5, 182->183, 185->181, 190->191)
-// fall through into the next block, so block order matters. Do not reorder or convert to switch.
+// Structured decoder. Originally a nibble-by-nibble state machine (2020); it now reads whole
+// fields through a HexReader. Running out of input anywhere throws EndOfInput, which is caught
+// once in parse(): rows pushed before the throw are kept, nothing partial is pushed.
 
 import type { TypeLookup } from "./definitions.ts";
 
@@ -26,787 +26,475 @@ export type ParseResult = { rows: Row[]; status: Status };
 
 export type ParseDefs = { types: Record<string, number>; lookup: TypeLookup };
 
+/** Serialized type codes. */
+const TYPE = {
+  UInt16: 1,
+  UInt32: 2,
+  UInt64: 3,
+  Hash128: 4,
+  Hash256: 5,
+  Amount: 6,
+  Blob: 7,
+  AccountID: 8,
+  /** Type 9 is not a real type; the original visualizer treats it as padding ("nops"). */
+  NOP: 9,
+  STObject: 14,
+  STArray: 15,
+  UInt8: 16,
+  Hash160: 17,
+  PathSet: 18,
+  Vector256: 19,
+  Issue: 24,
+  XChainBridge: 25,
+  Currency: 26,
+} as const;
+
+/** Field code that closes an STObject / STArray. */
+const END_MARKER_FIELD = 1;
+
+/** Indent (in em) added per nesting level: objects, arrays and pathset steps. */
+const INDENT_STEP = 2;
+
+const bytes = (n: number) => n * 2; // bytes -> nibbles
+
+/** Payload size of the fixed-width types. */
+const FIXED_NIBBLES: Record<number, number> = {
+  [TYPE.UInt8]: bytes(1),
+  [TYPE.UInt16]: bytes(2),
+  [TYPE.UInt32]: bytes(4),
+  [TYPE.UInt64]: bytes(8),
+  [TYPE.Hash128]: bytes(16),
+  [TYPE.Hash160]: bytes(20),
+  [TYPE.Hash256]: bytes(32),
+};
+
+const XRP_AMOUNT_NIBBLES = bytes(8);
+// IOU amount = 48 bytes: 3 nibbles flags+exponent, 13 mantissa, 40 currency, 40 issuer
+const IOU_FLAGS_EXPONENT_NIBBLES = 3;
+const IOU_MANTISSA_NIBBLES = 13;
+const NOT_XRP_BIT = 8; // bit 3 of the first nibble
+const EXPONENT_BIAS = 97;
+const CURRENCY_NIBBLES = bytes(20);
+const ACCOUNT_NIBBLES = bytes(20);
+const ACCOUNT_WITH_VL_NIBBLES = bytes(21); // 1 VL byte + 20 bytes (XChainBridge doors/issuers)
+const ZERO_CURRENCY = "0".repeat(CURRENCY_NIBBLES);
+
+/** Variable length prefix limits. */
+const VL_ONE_BYTE_MAX = 192;
+const VL_TWO_BYTE_MAX = 240;
+const VL_TWO_BYTE_OFFSET = 193;
+const VL_THREE_BYTE_MIN = 241;
+const VL_THREE_BYTE_OFFSET = 12481;
+
+/** Vector256 chunk size in nibbles. */
+const HASH256_NIBBLES = bytes(32);
+
+/** PathSet step flags. */
+const PATH_ACCOUNT = 0x01;
+const PATH_CURRENCY = 0x10;
+const PATH_ISSUER = 0x20;
+const PATH_END = 0x00;
+const PATH_CONTINUE = 0xff;
+
+class EndOfInput extends Error {}
+
+type Chunk = { hex: string; value: number };
+
+/** Sequential reader over a whitespace-free hex string. Preserves the original character case. */
+class HexReader {
+  private pos = 0;
+  constructor(private readonly s: string) {}
+
+  atEnd(): boolean {
+    return this.pos >= this.s.length;
+  }
+
+  /** Reads n nibbles and returns the original characters. */
+  take(n: number): string {
+    if (this.pos + n > this.s.length) throw new EndOfInput();
+    const out = this.s.slice(this.pos, this.pos + n);
+    this.pos += n;
+    return out;
+  }
+
+  private chunk(n: number): Chunk {
+    const hex = this.take(n);
+    return { hex, value: Number.parseInt(hex, 16) };
+  }
+
+  nibble(): Chunk {
+    return this.chunk(1);
+  }
+
+  byte(): Chunk {
+    return this.chunk(2);
+  }
+
+  /** Value of the next nibble without consuming it. */
+  peek(): number {
+    if (this.atEnd()) throw new EndOfInput();
+    return Number.parseInt(this.s[this.pos], 16);
+  }
+}
+
+type FieldHeader = { type: number; field: number; compact: boolean };
+
 export function parse(hex: string, defs: ParseDefs): ParseResult {
+  const input = hex.replace(/\s/g, "");
+  const r = new HexReader(input);
   const rows: Row[] = [];
-  let indent_level = 0;
-  let unknown_detected = false;
+  let indent = 0;
+  let unknownDetected = false;
+  let negativeDepth = false;
+  const depth = { object: 0, array: 0 };
 
   const push = (kind: Row["kind"], label: string, h: string, breakdown?: BreakdownPart[]) => {
-    const row: Row = { kind, label, hex: h, indent: indent_level };
+    const row: Row = { kind, label, hex: h, indent };
     if (breakdown) row.breakdown = breakdown;
     rows.push(row);
   };
 
-  function print_error(c: string, label = "Invalid character") {
-    rows.push({ kind: "error", label, hex: c, indent: 0 });
-  }
-
-  function print_type(t: number, h: string) {
-    let s = "Unknown";
+  const pushType = (t: number, h: string) => {
+    let name = "Unknown";
     for (const k in defs.types) {
       if (defs.types[k] === t) {
-        s = k;
+        name = k;
         break;
       }
     }
+    if (name === "Unknown") unknownDetected = true;
+    name = name.replaceAll("Hash", "UInt").toUpperCase();
+    if (name.startsWith("ST")) name = name.substring(2);
+    push("type", name, h);
+  };
 
-    if (s === "Unknown") unknown_detected = true;
+  const pushField = (t: number, fc: number, h: string) => {
+    let name = "[[UNKNOWN_FIELD]]";
+    if (t in defs.lookup && fc in defs.lookup[t]) name = defs.lookup[t][fc].name;
+    else unknownDetected = true;
+    push("field", name, h);
+  };
 
-    s = s.replaceAll("Hash", "UInt").toUpperCase();
+  /** Reads n nibbles into a payload row; returns the hex. */
+  const payload = (label: string, nibbles: number): string => {
+    const h = r.take(nibbles);
+    push("payload", label, h);
+    return h;
+  };
 
-    if (s.substring(0, 2) === "ST") s = s.substring(2);
+  const asciiCode = (h: string) =>
+    String.fromCharCode(parseInt(h.slice(24, 26), 16)) +
+    String.fromCharCode(parseInt(h.slice(26, 28), 16)) +
+    String.fromCharCode(parseInt(h.slice(28, 30), 16));
 
-    push("type", s, h);
+  /** Type + field code, in every encoding. Emits the explain/type/field rows. */
+  function readFieldHeader(): FieldHeader {
+    const first = r.nibble();
+    if (first.value !== 0) {
+      const type = first.value;
+      pushType(type, first.hex);
+      const f = r.nibble();
+      if (f.value !== 0) {
+        pushField(type, f.value, f.hex);
+        return { type, field: f.value, compact: true };
+      }
+      push("explain", "field uncommon", f.hex);
+      const fc = r.byte();
+      pushField(type, fc.value, fc.hex);
+      return { type, field: fc.value, compact: false };
+    }
+
+    push("explain", "type uncommon", first.hex);
+    const second = r.nibble();
+    if (second.value !== 0) {
+      const t = r.byte();
+      // legacy quirk: the field row comes before the type row because the field nibble came first
+      pushField(t.value, second.value, second.hex);
+      pushType(t.value, t.hex);
+      return { type: t.value, field: second.value, compact: false };
+    }
+
+    push("explain", "both type and field uncommon", second.hex);
+    const t = r.byte();
+    pushType(t.value, t.hex);
+    const f = r.byte();
+    pushField(t.value, f.value, f.hex);
+    return { type: t.value, field: f.value, compact: false };
   }
 
-  function print_field(t: number, fc: number, h: string) {
-    let s = "[[UNKNOWN_FIELD]]";
-
-    if (t in defs.lookup && fc in defs.lookup[t]) s = defs.lookup[t][fc].name;
-    else unknown_detected = true;
-
-    push("field", s, h);
+  /** Reads a variable length prefix, emits its explain row and returns the byte length. */
+  function readVL(): number {
+    const b1 = r.byte();
+    if (b1.value <= VL_ONE_BYTE_MAX) {
+      push("explain", `1 byte length ${b1.value}`, b1.hex);
+      return b1.value;
+    }
+    if (b1.value <= VL_TWO_BYTE_MAX) {
+      const b2 = r.byte();
+      const len = VL_TWO_BYTE_OFFSET + (b1.value - VL_TWO_BYTE_OFFSET) * 256 + b2.value;
+      push("explain", `2 byte length ${len}`, b1.hex + b2.hex);
+      return len;
+    }
+    const b2 = r.byte();
+    const b3 = r.byte();
+    const len =
+      VL_THREE_BYTE_OFFSET + (b1.value - VL_THREE_BYTE_MIN) * 65536 + b2.value * 256 + b3.value;
+    push("explain", `3 byte length ${len}`, b1.hex + b2.hex + b3.hex);
+    return len;
   }
 
-  function print_explain(h: string, msg: string) {
-    push("explain", msg, h);
+  function readBlob() {
+    const len = readVL();
+    if (len > 0) payload("", bytes(len));
   }
 
-  function print_explain_payload(h: string, msg: string) {
-    push("explainPayload", msg, h);
+  function readVector256() {
+    let remaining = bytes(readVL());
+    let acc = "";
+    let n = 0;
+    while (remaining > 0) {
+      const c = r.take(1);
+      // chunks are cut on the remaining count, so an inconsistent length yields a short first chunk
+      if (remaining % HASH256_NIBBLES === 0 && acc !== "") {
+        push("payload", `hash ${n++}`, acc);
+        acc = "";
+      }
+      remaining--;
+      acc += c;
+    }
+    if (acc !== "") push("payload", `hash ${n}`, acc);
   }
 
-  function print_explain_payload_special(h: string, msg: string, breakdown: BreakdownPart[]) {
-    push("special", msg, h, breakdown);
+  function readAccount() {
+    const prefix = r.byte();
+    push("explain", "account vl prefix", prefix.hex);
+    // legacy quirk: a "00" prefix yields an empty payload row instead of reading an account
+    push("payload", "", prefix.hex === "00" ? "" : r.take(ACCOUNT_NIBBLES));
   }
 
-  function print_payload(_t: string, _f: string, h: string, msg: string) {
-    push("payload", msg === "&nbsp;" ? "" : msg, h);
+  function readAmount() {
+    const first = r.nibble();
+    if ((first.value & NOT_XRP_BIT) === 0) {
+      const carry = first.value & 0x3;
+      push("special", "Flags", first.hex, [
+        { text: "Bit" },
+        { text: "0", note: "XAH Bit" },
+        { text: "1", note: "Sign Bit + Positve" },
+        { text: carry.toString(2).padStart(2, "0"), note: "First bits of drops integer" },
+      ]);
+      const drops = r.take(XRP_AMOUNT_NIBBLES - 1);
+      push("special", "XAH Drops", drops, [
+        { text: "Dec" },
+        {
+          text: String(carry + parseInt(drops, 16)),
+          note: "XAH Drops including two bits above",
+        },
+      ]);
+      return;
+    }
+
+    const head = first.hex + r.take(IOU_FLAGS_EXPONENT_NIBBLES - 1);
+    const firstthree = parseInt(head, 16);
+    const bits = firstthree >> 10;
+    const exponentNum = ((firstthree >> 2) & 0xff) >>> 0;
+    const exponent = exponentNum.toString(2).padStart(8, "0");
+    push("special", "Flags + Exponent", head, [
+      { text: "Bit" },
+      { text: "1", note: "Not XRP Bit" },
+      { text: String(bits & 1), note: bits & 1 ? "Sign Bit + Positive" : "Sign Bit - Negative" },
+      {
+        text: exponent,
+        note: `Exponent Raw: ${exponentNum}, Adjusted: ${exponentNum - EXPONENT_BIAS}`,
+      },
+      { text: `${firstthree & 0x2}${firstthree & 0x1}`, note: "First two bits of mantissa" },
+    ]);
+    // legacy quirk: JS shifts by (52 & 31) = 20 bits here, not 52
+    const carry = (firstthree & 0x3) << 52;
+
+    const mantissa = r.take(IOU_MANTISSA_NIBBLES);
+    push("special", "Mantissa", mantissa, [
+      { text: "Dec" },
+      { text: String(carry + parseInt(mantissa, 16)), note: "Mantissa including two bits above" },
+    ]);
+
+    const currency = r.take(CURRENCY_NIBBLES);
+    push("special", "Currency Code", currency, [{ text: "Asc" }, { text: asciiCode(currency) }]);
+
+    push("explainPayload", "Issuer", r.take(ACCOUNT_NIBBLES));
   }
 
-  const inp = hex;
-  const inp_nospace = inp.replace(/\s/gi, "");
+  /** Reads a 20 byte currency payload row; true if it is not the all-zero (native) currency. */
+  function readCurrencyPayload(label: string): boolean {
+    return payload(label, CURRENCY_NIBBLES) !== ZERO_CURRENCY;
+  }
 
-  unknown_detected = false;
+  function readIssue() {
+    if (readCurrencyPayload("currency")) payload("issuer", ACCOUNT_NIBBLES);
+  }
 
-  let negative_depth = false;
+  function readXChainBridge() {
+    payload("locking chain door", ACCOUNT_WITH_VL_NIBBLES);
+    if (readCurrencyPayload("locking chain currency"))
+      payload("locking chain issuer", ACCOUNT_WITH_VL_NIBBLES);
+    payload("issuing chain door", ACCOUNT_WITH_VL_NIBBLES);
+    if (readCurrencyPayload("issuing chain currency"))
+      payload("issuing chain issuer", ACCOUNT_WITH_VL_NIBBLES);
+  }
 
-  let state = 0;
-  let to_accumulate = 0;
+  function readCurrency() {
+    const h = r.take(CURRENCY_NIBBLES);
+    const text = h === ZERO_CURRENCY ? "XAH" : asciiCode(h);
+    push("special", "currency", h, [{ text }]);
+  }
 
-  let hexaccum = "";
-  let vec_counter = 0;
-
-  let lastnibble = 0;
-
-  let st_type = 0;
-  let st_field = 0;
-
-  let field_hex = "";
-
-  let array_depth = 0;
-  let object_depth = 0;
-
-  let amount_type = -1;
-  let mantissa_carry = 0;
-  let flags = 0;
-  let i = 0;
-  for (i = 0; i < inp.length; ++i) {
-    let nibble = 0;
-    const ascii = inp.charCodeAt(i);
-    if (ascii >= 48 && ascii <= 57) {
-      // 0-9
-      nibble = ascii - 48;
-    } else if (ascii >= 65 && ascii <= 70) {
-      // A-F
-      nibble = ascii - 65 + 10;
-    } else if (ascii >= 97 && ascii <= 102) {
-      // a-f
-      nibble = ascii - 97 + 10;
-    } else if (ascii === 32 || ascii === 9 || ascii === 10 || ascii === 13) {
-      // whitepsace, skip
-      continue;
-    } else {
-      print_error(inp[i]);
-      break;
-    }
-
-    if (state === 51) {
-      hexaccum += inp[i];
-      if (st_type === 6 && to_accumulate === -1 && nibble & 8) {
-        to_accumulate = 96; // non-xrp currency
-        amount_type = 1;
-      } else if (st_type === 6 && to_accumulate === -1 && (nibble & 8) === 0) {
-        to_accumulate = 16; // xrp currency
-        amount_type = 0;
-      } else if (st_type === 8 && to_accumulate === 41) {
-        // accumulate the 2 VL nibbles at the start of the account field
-        print_explain(hexaccum, "account vl prefix");
-        if (hexaccum === "00") to_accumulate = 1;
-        hexaccum = "";
-        amount_type = -1;
-      }
-
-      to_accumulate--;
-      if (amount_type === 0) {
-        if (to_accumulate === 15) {
-          let r = parseInt(hexaccum, 16) >>> 0;
-          r &= 0x3;
-          mantissa_carry = r;
-          let rbits = r.toString(2);
-          if (rbits.length === 1) rbits = `0${rbits}`;
-
-          print_explain_payload_special(hexaccum, "Flags", [
-            { text: "Bit" },
-            { text: "0", note: "XAH Bit" },
-            { text: "1", note: "Sign Bit + Positve" },
-            { text: rbits, note: "First bits of drops integer" },
-          ]);
-          hexaccum = "";
-        } else if (to_accumulate === 0) {
-          print_explain_payload_special(hexaccum, "XAH Drops", [
-            { text: "Dec" },
-            {
-              text: String(mantissa_carry + parseInt(hexaccum, 16)),
-              note: "XAH Drops including two bits above",
-            },
-          ]);
-          amount_type = -1;
-          state = 0;
-        }
-      } else if (amount_type === 1) {
-        if (to_accumulate === 93) {
-          const firstthree = parseInt(hexaccum.slice(0, 3), 16);
-          const bits = firstthree >> 10;
-
-          const exponent_num = ((firstthree >> 2) & 0xff) >>> 0;
-          let exponent = exponent_num.toString(2);
-          if (exponent.length !== 8) exponent = "0".repeat(8 - exponent.length) + exponent;
-
-          print_explain_payload_special(hexaccum, "Flags + Exponent", [
-            { text: "Bit" },
-            { text: "1", note: "Not XRP Bit" },
-            {
-              text: String(bits & 1),
-              note: bits & 1 ? "Sign Bit + Positive" : "Sign Bit - Negative",
-            },
-            {
-              text: exponent,
-              note: `Exponent Raw: ${exponent_num}, Adjusted: ${exponent_num - 97}`,
-            },
-            {
-              text: `${firstthree & 0x2}${firstthree & 0x1}`,
-              note: "First two bits of mantissa",
-            },
-          ]);
-          mantissa_carry = (firstthree & 0x3) << 52;
-
-          hexaccum = "";
-        } else if (to_accumulate === 80) {
-          print_explain_payload_special(hexaccum, "Mantissa", [
-            { text: "Dec" },
-            {
-              text: String(mantissa_carry + parseInt(hexaccum, 16)),
-              note: "Mantissa including two bits above",
-            },
-          ]);
-          hexaccum = "";
-        } else if (to_accumulate === 40) {
-          const currency =
-            String.fromCharCode(parseInt(hexaccum.slice(24, 26), 16)) +
-            String.fromCharCode(parseInt(hexaccum.slice(26, 28), 16)) +
-            String.fromCharCode(parseInt(hexaccum.slice(28, 30), 16));
-          print_explain_payload_special(hexaccum, "Currency Code", [
-            { text: "Asc" },
-            { text: currency },
-          ]);
-          hexaccum = "";
-        } else if (to_accumulate === 0) {
-          print_explain_payload(hexaccum, "Issuer");
-          hexaccum = "";
-          state = 0;
-          amount_type = -1;
-        }
-      } else if (amount_type === -1 && to_accumulate === 0) {
-        print_payload("", "", hexaccum, "&nbsp;");
-        state = 0;
-      }
-      continue;
-    }
-
-    if (state === 70) {
-      // parsing a VL field
-      hexaccum = inp[i];
-      lastnibble = nibble;
-      state = 71;
-      continue;
-    }
-
-    if (state === 71) {
-      hexaccum += inp[i];
-      const b = (lastnibble << 4) + nibble;
-      if (b <= 192) {
-        to_accumulate = b * 2;
-        print_explain(hexaccum, `1 byte length ${b}`);
-        hexaccum = "";
-        if (to_accumulate === 0) state = 0;
-        else state = st_type === 19 ? 190 : 51;
-        continue;
-      } else if (b >= 193 && b <= 240) {
-        to_accumulate = (b - 193) * 256 + 193;
-        state = 72;
-        continue;
-      } else {
-        to_accumulate = 12481 + (b - 241) * 65536;
-        state = 74;
-        continue;
-      }
-    }
-
-    if (state === 72) {
-      hexaccum += inp[i];
-      lastnibble = nibble;
-      state = 73;
-      continue;
-    }
-    if (state === 73) {
-      hexaccum += inp[i];
-      const b = (lastnibble << 4) + nibble;
-      to_accumulate += b;
-      print_explain(hexaccum, `2 byte length ${to_accumulate}`);
-      to_accumulate *= 2;
-      hexaccum = "";
-      state = st_type === 19 ? 190 : 51;
-      continue;
-    }
-
-    if (state === 74) {
-      hexaccum += inp[i];
-      lastnibble = nibble;
-      state = 75;
-      continue;
-    }
-    if (state === 75) {
-      hexaccum += inp[i];
-      const b = (lastnibble << 4) + nibble;
-      to_accumulate += b * 256;
-      state = 76;
-      continue;
-    }
-
-    if (state === 76) {
-      hexaccum += inp[i];
-      lastnibble = nibble;
-      state = 77;
-      continue;
-    }
-    if (state === 77) {
-      hexaccum += inp[i];
-      const b = (lastnibble << 4) + nibble;
-      to_accumulate += b;
-      print_explain(hexaccum, `3 byte length ${to_accumulate}`);
-      to_accumulate *= 2;
-      hexaccum = "";
-      state = st_type === 19 ? 190 : 51;
-      continue;
-    }
-
-    if (state === -4) {
-      // check if its another nop (type)
-      if (nibble === 9) {
-        hexaccum += nibble;
-        state = -3;
-        continue;
-      } else {
-        if (hexaccum !== "") {
-          print_payload("", "", hexaccum, "");
-          hexaccum = "";
-        }
-        state = 0; // fall through
-      }
-    }
-
-    if (state === -3) {
-      hexaccum += nibble;
-      if (nibble === 0) {
-        // field uncommon
-        state = -2;
-        continue;
-      }
-      state = -4;
-      continue;
-    }
-
-    if (state === -2) {
-      hexaccum += nibble;
-      state = -4;
-      continue;
-    }
-
-    if (state === 0) {
-      // parsing type
-      if (nibble === 0) {
-        print_explain(inp[i], "type uncommon");
-        state = 1;
-        continue;
-      }
-
-      st_type = nibble; // this is the case where it's a one nibble type
-      print_type(st_type, inp[i]);
-      state = 4; // expect 4 bit field code
-      continue;
-    }
-
-    if (state === 4) {
-      if (nibble === 0) {
-        print_explain(inp[i], "field uncommon");
-        state = 6;
-        continue;
-      }
-
-      st_field = nibble;
-      print_field(st_type, nibble, inp[i]);
-      if (st_type === 9) {
-        // nop
-        hexaccum = "";
-        state = -4;
-        continue;
-      }
-
-      state = 5; // state 5 is a fallthrough state so do not continue
-    }
-
-    if (state === 6) {
-      lastnibble = nibble; // store the high nibble of fieldcode
-      hexaccum = inp[i];
-      state = 61;
-      continue;
-    }
-
-    if (state === 61) {
-      hexaccum += inp[i];
-      st_field = (lastnibble << 4) + nibble;
-      print_field(st_type, st_field, hexaccum);
-      state = 5; // both type code (4 bits) and field code (8 bits) parsed
-    }
-
-    if (state === 1) {
-      // parsing type with first nibble = 0
-      if (nibble === 0) {
-        print_explain(inp[i], "both type and field uncommon");
-        state = 2; // expect 8 bit typecode next followed by 8 bit field code
-        continue;
-      }
-
-      st_field = nibble; // we cant print until we parse type
-      field_hex = inp[i];
-
-      state = 3; // except 8 bit typecode next, we still need to print field
-      continue;
-    }
-
-    if (state === 3) {
-      // expect 8 bit typecode
-      lastnibble = nibble; // store the high nibble of typecode
-      hexaccum = inp[i];
-      state = 31;
-      continue;
-    }
-
-    if (state === 31) {
-      hexaccum += inp[i];
-      st_type = (lastnibble << 4) + nibble;
-      // we still need to print the field because it came first but we didnt know it until we had type
-      print_field(st_type, st_field, field_hex);
-      print_type(st_type, hexaccum);
-      state = 5; // both field code (4 bits) and type code (8 bits) parsed
-    }
-
-    if (state === 2) {
-      // expect 8 bit typecode followed by 8 bit field code
-      lastnibble = nibble; // store the high nibble of typecode
-      hexaccum = inp[i];
-      state = 21;
-      continue;
-    }
-
-    if (state === 21) {
-      hexaccum += inp[i];
-      st_type = (lastnibble << 4) + nibble;
-      print_type(st_type, hexaccum);
-      state = 22; // expect 8 bit field code
-      continue;
-    }
-
-    if (state === 22) {
-      lastnibble = nibble;
-      hexaccum = inp[i];
-      state = 23;
-      continue;
-    }
-
-    if (state === 23) {
-      hexaccum += inp[i];
-      st_field = (lastnibble << 4) + nibble;
-      print_field(st_type, st_field, hexaccum);
-      state = 5; // type and field read
-    }
-
-    if (state === 240) {
-      hexaccum += inp[i];
-      if (--to_accumulate === 0) {
-        print_payload("", "", hexaccum, "currency");
-        if (hexaccum !== "0".repeat(40)) {
-          state = 241;
-          hexaccum = "";
-          to_accumulate = 40;
-          continue;
-        }
-        state = 0;
-      }
-      continue;
-    }
-
-    if (state === 241) {
-      hexaccum += inp[i];
-      if (--to_accumulate === 0) {
-        print_payload("", "", hexaccum, "issuer");
-        hexaccum = "";
-        state = 0;
-      }
-      continue;
-    }
-
-    if (state === 250) {
-      // account
-      hexaccum += inp[i];
-      if (--to_accumulate === 0) {
-        print_payload("", "", hexaccum, "locking chain door");
-        hexaccum = "";
-        state = 251;
-        to_accumulate = 40;
-      }
-      continue;
-    }
-
-    if (state === 251) {
-      // currency
-      hexaccum += inp[i];
-      if (--to_accumulate === 0) {
-        print_payload("", "", hexaccum, "locking chain currency");
-        if (hexaccum !== "0".repeat(40)) {
-          // we need to read a currency-issuer first
-          state = 252;
-          hexaccum = "";
-          to_accumulate = 42;
-          continue;
-        } else {
-          // skip to issuing chain door
-          state = 253;
-          hexaccum = "";
-          to_accumulate = 42;
-          continue;
-        }
-      }
-      continue;
-    }
-
-    if (state === 252) {
-      // account
-      hexaccum += inp[i];
-      if (--to_accumulate === 0) {
-        print_payload("", "", hexaccum, "locking chain issuer");
-        hexaccum = "";
-        to_accumulate = 42;
-        state = 253;
-      }
-      continue;
-    }
-
-    if (state === 253) {
-      // account
-      hexaccum += inp[i];
-      if (--to_accumulate === 0) {
-        print_payload("", "", hexaccum, "issuing chain door");
-        hexaccum = "";
-        state = 254;
-        to_accumulate = 40;
-      }
-      continue;
-    }
-
-    if (state === 254) {
-      // currnecy
-      hexaccum += inp[i];
-      if (--to_accumulate === 0) {
-        print_payload("", "", hexaccum, "issuing chain currency");
-        if (hexaccum !== "0".repeat(40)) {
-          // we need to read a currency-issuer first
-          hexaccum = "";
-          state = 255;
-          to_accumulate = 42;
-          continue;
-        }
-        state = 0;
-      }
-      continue;
-    }
-
-    if (state === 255) {
-      // account
-      hexaccum += inp[i];
-      if (--to_accumulate === 0) {
-        print_payload("", "", hexaccum, "issuing chain issuer");
-        hexaccum = "";
-        state = 0;
-      }
-      continue;
-    }
-
-    if (state === 260) {
-      // currency
-      hexaccum += inp[i];
-      if (--to_accumulate === 0) {
-        const isNative = hexaccum === "00".repeat(20);
-        const currency = isNative
-          ? "XAH"
-          : String.fromCharCode(parseInt(hexaccum.slice(24, 26), 16)) +
-            String.fromCharCode(parseInt(hexaccum.slice(26, 28), 16)) +
-            String.fromCharCode(parseInt(hexaccum.slice(28, 30), 16));
-        print_explain_payload_special(hexaccum, "currency", [{ text: currency }]);
-        state = 0;
-      }
-      continue;
-    }
-
-    if (state === 5) {
-      // now we process VL if any and print the field contents
-      hexaccum = "";
-
-      if (st_type === 1) to_accumulate = 4;
-      else if (st_type === 2) to_accumulate = 8;
-      else if (st_type === 3) to_accumulate = 16;
-      else if (st_type === 4) to_accumulate = 32;
-      else if (st_type === 5) to_accumulate = 64;
-      else if (st_type === 6) {
-        to_accumulate =
-          -1; /* special value because we need the next byte to know how big 16 or 96 */
-        amount_type = -1;
-      } else if (st_type === 24) {
-        to_accumulate = 40;
-        state = 240;
-        continue;
-      } else if (st_type === 25) {
-        to_accumulate = 42;
-        state = 250;
-        continue;
-      } else if (st_type === 26) {
-        to_accumulate = 40;
-        state = 260;
-        continue;
-      } else if (st_type === 7) {
-        state = 70;
-        continue;
-      } else if (st_type === 8) to_accumulate = 42;
-      else if (st_type === 14) {
-        if (st_field === 1) {
-          object_depth--; // end of object
-          indent_level -= 2;
-          if (object_depth < 0) negative_depth = true;
-        } else {
-          object_depth++;
-          indent_level += 2;
-        }
-        state = 0;
-        continue;
-      } else if (st_type === 15) {
-        if (st_field === 1) {
-          array_depth--; // end of array
-          indent_level -= 2;
-          if (array_depth < 0) negative_depth = true;
-        } else {
-          array_depth++;
-          indent_level += 2;
-        }
-        state = 0;
-        continue;
-      } else if (st_type === 16) to_accumulate = 2;
-      else if (st_type === 17) to_accumulate = 40;
-      else if (st_type === 18) {
-        indent_level += 2;
-        state = 180;
-        continue;
-      } else if (st_type === 19) {
-        state = 70;
-        continue;
-      } else {
-        // legacy passed a string as the output element here, so this was a silent no-op (no row
-        // was ever rendered); the golden fixture depends on that, so we only stop parsing.
-        break;
-      }
-
-      state = 51;
-      continue;
-    }
-
-    if (state === 190) {
-      // vector256
-      if (to_accumulate === 0) {
-        state = 0;
-        continue;
-      }
-      hexaccum = "";
-      state = 191;
-      vec_counter = 0;
-    }
-
-    if (state === 191) {
-      if (to_accumulate % 64 === 0 && hexaccum !== "") {
-        print_payload("", "", hexaccum, `hash ${vec_counter++}`);
-        hexaccum = "";
-      }
-      to_accumulate--;
-      hexaccum += inp[i];
-      if (to_accumulate <= 0) {
-        print_payload("", "", hexaccum, `hash ${vec_counter++}`);
-        hexaccum = "";
-        vec_counter = 0;
-        state = 0;
-        continue;
-      }
-      continue;
-    }
-
-    if (state === 182) {
-      // pathset accountid or currency or issuer
-      to_accumulate--;
-      hexaccum += inp[i];
-      if (to_accumulate <= 0)
-        state = flags === 0 ? 184 : 183; // fallthru
-      else continue;
-    }
-
-    if (state === 183) {
-      // display parsed field
-      if (flags & 0x01) {
-        print_payload("", "", hexaccum, "account");
-        flags -= 0x01;
-      } else if (flags & 0x10) {
-        print_payload("", "", hexaccum, "currency");
-        flags -= 0x10;
-      } else if (flags & 0x20) {
-        print_payload("", "", hexaccum, "issuer");
-        flags -= 0x20;
-      }
-
-      if (flags > 0) {
-        state = 182;
-        to_accumulate = 40;
-        hexaccum = "";
-        continue;
-      }
-
-      state = 184;
-      continue;
-    }
-
-    if (state === 184) {
-      lastnibble = nibble;
-      state = 185;
-      continue;
-    }
-
-    if (state === 185) {
-      // check if continue or end byte for path set
-      const byte = (lastnibble << 4) + nibble;
-
-      if (byte === 0x00) {
-        // end byte
-        indent_level -= 4;
-        print_explain(`${inp[i - 1]}${inp[i]}`, "pathset end");
-        state = 0;
-        continue;
-      } else if (byte === 0xff) {
-        // continue byte
-        indent_level -= 2;
-        print_explain(`${inp[i - 1]}${inp[i]}`, "pathset continue");
-        state = 180;
-        continue;
-      } else {
-        // another path step
-        indent_level -= 2;
-        flags = byte;
-        state = 181; // fall through
-      }
-    }
-
-    if (state === 180) {
-      // pathset lead byte
-      lastnibble = nibble;
-      state = 181;
-      continue;
-    }
-
-    if (state === 181) {
-      // pathset second byte
-      flags = (lastnibble << 4) + nibble;
-
-      print_explain(
-        `${inp[i - 1]}${inp[i]}`,
+  /** Returns false when the step flags are unusable and parsing must stop. */
+  function readPathSet(): boolean {
+    indent += INDENT_STEP;
+    let step = r.byte();
+    for (;;) {
+      const flags = step.value;
+      push(
+        "explain",
         "step w/ " +
-          (flags & 0x1 ? "account " : "") +
-          (flags & 0x10 ? "currency " : "") +
-          (flags & 0x20 ? "issuer" : "") +
-          ""
+          (flags & PATH_ACCOUNT ? "account " : "") +
+          (flags & PATH_CURRENCY ? "currency " : "") +
+          (flags & PATH_ISSUER ? "issuer" : ""),
+        step.hex
       );
+      if (flags === 0 || flags & ~(PATH_ACCOUNT | PATH_CURRENCY | PATH_ISSUER)) return false;
 
-      let tmp = flags;
-      if (tmp === 0) break;
+      indent += INDENT_STEP;
+      if (flags & PATH_ACCOUNT) payload("account", ACCOUNT_NIBBLES);
+      if (flags & PATH_CURRENCY) payload("currency", CURRENCY_NIBBLES);
+      if (flags & PATH_ISSUER) payload("issuer", ACCOUNT_NIBBLES);
 
-      if (tmp & 0x01) tmp -= 0x01;
-
-      if (tmp & 0x10) tmp -= 0x10;
-
-      if (tmp & 0x20) tmp -= 0x20;
-
-      if (tmp !== 0) break;
-
-      indent_level += 2;
-
-      hexaccum = "";
-      to_accumulate = 40;
-      state = 182;
-      continue;
+      const next = r.byte();
+      if (next.value === PATH_END) {
+        indent -= 2 * INDENT_STEP; // closes the step and the pathset
+        push("explain", "pathset end", next.hex);
+        return true;
+      }
+      indent -= INDENT_STEP;
+      if (next.value === PATH_CONTINUE) {
+        push("explain", "pathset continue", next.hex);
+        step = r.byte();
+      } else {
+        step = next;
+      }
     }
+  }
 
-    print_error("?", "Unknown parsing state maybe something wasn't implemented yet? Report this!");
-    break;
+  /** Padding: nibble 9 followed by another nibble (and one more if that is 0), accumulated in decimal. */
+  function readNops() {
+    let acc = "";
+    for (;;) {
+      if (r.peek() !== TYPE.NOP) {
+        if (acc !== "") push("payload", "", acc);
+        return;
+      }
+      r.nibble();
+      acc += TYPE.NOP;
+      const m = r.nibble();
+      acc += m.value;
+      if (m.value === 0) acc += r.nibble().value;
+    }
+  }
+
+  function nest(kind: "object" | "array", field: number) {
+    if (field === END_MARKER_FIELD) {
+      depth[kind]--;
+      indent -= INDENT_STEP;
+      if (depth[kind] < 0) negativeDepth = true;
+    } else {
+      depth[kind]++;
+      indent += INDENT_STEP;
+    }
+  }
+
+  /** Reads the value of a field. Returns false when parsing must stop (unknown type, bad pathset). */
+  function readBody({ type, field, compact }: FieldHeader): boolean {
+    if (type in FIXED_NIBBLES) {
+      payload("", FIXED_NIBBLES[type]);
+      return true;
+    }
+    switch (type) {
+      case TYPE.Amount:
+        readAmount();
+        return true;
+      case TYPE.Blob:
+        readBlob();
+        return true;
+      case TYPE.AccountID:
+        readAccount();
+        return true;
+      case TYPE.STObject:
+        nest("object", field);
+        return true;
+      case TYPE.STArray:
+        nest("array", field);
+        return true;
+      case TYPE.PathSet:
+        return readPathSet();
+      case TYPE.Vector256:
+        readVector256();
+        return true;
+      case TYPE.Issue:
+        readIssue();
+        return true;
+      case TYPE.XChainBridge:
+        readXChainBridge();
+        return true;
+      case TYPE.Currency:
+        readCurrency();
+        return true;
+      case TYPE.NOP:
+        // legacy: nops only exist with a one-nibble type and one-nibble field
+        if (!compact) return false;
+        readNops();
+        return true;
+      default:
+        // legacy rendered nothing for unknown types, the golden fixtures depend on that
+        return false;
+    }
+  }
+
+  // "clean": ended on a field boundary, "truncated": ran out of input, "stopped": gave up early
+  let outcome: "clean" | "truncated" | "stopped" = "clean";
+  try {
+    while (!r.atEnd()) {
+      if (!readBody(readFieldHeader())) {
+        outcome = "stopped";
+        break;
+      }
+    }
+  } catch (e) {
+    if (!(e instanceof EndOfInput)) throw e;
+    outcome = "truncated";
   }
 
   if (
-    !unknown_detected &&
-    i === inp.length &&
-    object_depth === 0 &&
-    array_depth === 0 &&
-    state === 0 &&
-    !negative_depth
+    !unknownDetected &&
+    outcome === "clean" &&
+    depth.object === 0 &&
+    depth.array === 0 &&
+    !negativeDepth
   )
     return { rows, status: { kind: "good", message: "Looks like a valid STObject." } };
 
   const ugly = (message: string): ParseResult => ({ rows, status: { kind: "ugly", message } });
 
-  const indent_info =
-    (object_depth !== 0 ? " and one or more internal objects lacked a terminator" : "") +
-    (array_depth !== 0 ? " and one or more internal arrays lacked a terminator" : "") +
-    (negative_depth ? " and one or more internal objects or arrays lacked a header" : "");
+  const indentInfo =
+    (depth.object !== 0 ? " and one or more internal objects lacked a terminator" : "") +
+    (depth.array !== 0 ? " and one or more internal arrays lacked a terminator" : "") +
+    (negativeDepth ? " and one or more internal objects or arrays lacked a header" : "");
 
-  const up = inp_nospace.toUpperCase();
+  const up = input.toUpperCase();
   const len = up.length;
   if (len === 66 || len === 64 || len === 40)
     return ugly(
       "Parser did not complete cleanly" +
-        indent_info +
-        (unknown_detected ? " and unknown fields were detected" : "") +
+        indentInfo +
+        (unknownDetected ? " and unknown fields were detected" : "") +
         " ...\nby the way this " +
         (up[0] === "E" && up[1] === "D" && len === 66
           ? "is definitely a public key not an STObject"
@@ -816,14 +504,14 @@ export function parse(hex: string, defs: ParseDefs): ParseResult {
               ? "might be an AccountID."
               : "might be a hash.")
     );
-  if (unknown_detected)
+  if (unknownDetected)
     return ugly(
       "Unknown fields detected " +
-        (i === up.length ? "" : "and parser did not end cleanly, ") +
+        (outcome === "stopped" ? "and parser did not end cleanly, " : "") +
         "either not an STObject or wrong definitions.json. Try adding: ?url-to-your-definitions.json to the current URL"
     );
 
   return ugly(
-    `Parser did not complete cleanly${indent_info}, if this is an STObject it is incomplete.`
+    `Parser did not complete cleanly${indentInfo}, if this is an STObject it is incomplete.`
   );
 }
