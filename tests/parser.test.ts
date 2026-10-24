@@ -22,7 +22,17 @@ const suites: [string, Record<string, Golden>, Definitions][] = [
     load("./legacy-golden-extra.json"),
     load("../public/def.json"),
   ],
+  [
+    "legacy golden extra 2 (def.json)",
+    load("./legacy-golden-extra2.json"),
+    load("../public/def.json"),
+  ],
   ["legacy golden (xahau types)", load("./legacy-golden-xahau.json"), load("./xahau-defs.json")],
+  [
+    "legacy golden (xahau transactions)",
+    load("./legacy-golden-xahau-txs.json"),
+    load("./xahau-definitions.json"),
+  ],
 ];
 
 const strip = (s: string) => s.replace(/[\s\0]+/g, "");

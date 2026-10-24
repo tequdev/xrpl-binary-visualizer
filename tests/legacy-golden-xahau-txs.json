@@ -1,0 +1,1417 @@
+{
+  "sethook": {
+    "input": "1200162100005359240000000A684000000000000064811493B89AFCAD4C8EAC2B131C1331FEF12AE1522BBEFBEE22000000015014000000000000000000000000000000000000000000000000000000000000003E501FAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA5020BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBF013E017701802ABCD7019020102E1F1E1EE1014000022000000015014FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF502000000000000000000000000000000000000000000000000000000000000000007B090061736D0100000001E1F1",
+    "rows": [
+      {
+        "left": "UINT16",
+        "right": "1",
+        "indent": 0
+      },
+      {
+        "left": "TransactionType",
+        "right": "2",
+        "indent": 0
+      },
+      {
+        "left": "",
+        "right": "0016",
+        "indent": 0
+      },
+      {
+        "left": "UINT32",
+        "right": "2",
+        "indent": 0
+      },
+      {
+        "left": "NetworkID",
+        "right": "1",
+        "indent": 0
+      },
+      {
+        "left": "",
+        "right": "00005359",
+        "indent": 0
+      },
+      {
+        "left": "UINT32",
+        "right": "2",
+        "indent": 0
+      },
+      {
+        "left": "Sequence",
+        "right": "4",
+        "indent": 0
+      },
+      {
+        "left": "",
+        "right": "0000000A",
+        "indent": 0
+      },
+      {
+        "left": "AMOUNT",
+        "right": "6",
+        "indent": 0
+      },
+      {
+        "left": "Fee",
+        "right": "8",
+        "indent": 0
+      },
+      {
+        "left": "Flags",
+        "right": "4Bit 0 (XAH Bit) 1 (Sign Bit + Positve) 00 (First bits of drops integer)",
+        "indent": 0
+      },
+      {
+        "left": "XAH Drops",
+        "right": "000000000000064Dec 100 (XAH Drops including two bits above)",
+        "indent": 0
+      },
+      {
+        "left": "ACCOUNTID",
+        "right": "8",
+        "indent": 0
+      },
+      {
+        "left": "Account",
+        "right": "1",
+        "indent": 0
+      },
+      {
+        "left": "account vl prefix",
+        "right": "14",
+        "indent": 0
+      },
+      {
+        "left": "",
+        "right": "93B89AFCAD4C8EAC2B131C1331FEF12AE1522BBE",
+        "indent": 0
+      },
+      {
+        "left": "ARRAY",
+        "right": "F",
+        "indent": 0
+      },
+      {
+        "left": "Hooks",
+        "right": "B",
+        "indent": 0
+      },
+      {
+        "left": "OBJECT",
+        "right": "E",
+        "indent": 2
+      },
+      {
+        "left": "Hook",
+        "right": "E",
+        "indent": 2
+      },
+      {
+        "left": "UINT32",
+        "right": "2",
+        "indent": 4
+      },
+      {
+        "left": "Flags",
+        "right": "2",
+        "indent": 4
+      },
+      {
+        "left": "",
+        "right": "00000001",
+        "indent": 4
+      },
+      {
+        "left": "UINT256",
+        "right": "5",
+        "indent": 4
+      },
+      {
+        "left": "field uncommon",
+        "right": "0",
+        "indent": 4
+      },
+      {
+        "left": "HookOn",
+        "right": "14",
+        "indent": 4
+      },
+      {
+        "left": "",
+        "right": "000000000000000000000000000000000000000000000000000000000000003E",
+        "indent": 4
+      },
+      {
+        "left": "UINT256",
+        "right": "5",
+        "indent": 4
+      },
+      {
+        "left": "field uncommon",
+        "right": "0",
+        "indent": 4
+      },
+      {
+        "left": "HookHash",
+        "right": "1F",
+        "indent": 4
+      },
+      {
+        "left": "",
+        "right": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "indent": 4
+      },
+      {
+        "left": "UINT256",
+        "right": "5",
+        "indent": 4
+      },
+      {
+        "left": "field uncommon",
+        "right": "0",
+        "indent": 4
+      },
+      {
+        "left": "HookNamespace",
+        "right": "20",
+        "indent": 4
+      },
+      {
+        "left": "",
+        "right": "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB",
+        "indent": 4
+      },
+      {
+        "left": "ARRAY",
+        "right": "F",
+        "indent": 4
+      },
+      {
+        "left": "field uncommon",
+        "right": "0",
+        "indent": 4
+      },
+      {
+        "left": "HookParameters",
+        "right": "13",
+        "indent": 4
+      },
+      {
+        "left": "OBJECT",
+        "right": "E",
+        "indent": 6
+      },
+      {
+        "left": "field uncommon",
+        "right": "0",
+        "indent": 6
+      },
+      {
+        "left": "HookParameter",
+        "right": "17",
+        "indent": 6
+      },
+      {
+        "left": "BLOB",
+        "right": "7",
+        "indent": 8
+      },
+      {
+        "left": "field uncommon",
+        "right": "0",
+        "indent": 8
+      },
+      {
+        "left": "HookParameterName",
+        "right": "18",
+        "indent": 8
+      },
+      {
+        "left": "1 byte length 2",
+        "right": "02",
+        "indent": 8
+      },
+      {
+        "left": "",
+        "right": "ABCD",
+        "indent": 8
+      },
+      {
+        "left": "BLOB",
+        "right": "7",
+        "indent": 8
+      },
+      {
+        "left": "field uncommon",
+        "right": "0",
+        "indent": 8
+      },
+      {
+        "left": "HookParameterValue",
+        "right": "19",
+        "indent": 8
+      },
+      {
+        "left": "1 byte length 2",
+        "right": "02",
+        "indent": 8
+      },
+      {
+        "left": "",
+        "right": "0102",
+        "indent": 8
+      },
+      {
+        "left": "OBJECT",
+        "right": "E",
+        "indent": 8
+      },
+      {
+        "left": "ObjectEndMarker",
+        "right": "1",
+        "indent": 8
+      },
+      {
+        "left": "ARRAY",
+        "right": "F",
+        "indent": 6
+      },
+      {
+        "left": "ArrayEndMarker",
+        "right": "1",
+        "indent": 6
+      },
+      {
+        "left": "OBJECT",
+        "right": "E",
+        "indent": 4
+      },
+      {
+        "left": "ObjectEndMarker",
+        "right": "1",
+        "indent": 4
+      },
+      {
+        "left": "OBJECT",
+        "right": "E",
+        "indent": 2
+      },
+      {
+        "left": "Hook",
+        "right": "E",
+        "indent": 2
+      },
+      {
+        "left": "UINT16",
+        "right": "1",
+        "indent": 4
+      },
+      {
+        "left": "field uncommon",
+        "right": "0",
+        "indent": 4
+      },
+      {
+        "left": "HookApiVersion",
+        "right": "14",
+        "indent": 4
+      },
+      {
+        "left": "",
+        "right": "0000",
+        "indent": 4
+      },
+      {
+        "left": "UINT32",
+        "right": "2",
+        "indent": 4
+      },
+      {
+        "left": "Flags",
+        "right": "2",
+        "indent": 4
+      },
+      {
+        "left": "",
+        "right": "00000001",
+        "indent": 4
+      },
+      {
+        "left": "UINT256",
+        "right": "5",
+        "indent": 4
+      },
+      {
+        "left": "field uncommon",
+        "right": "0",
+        "indent": 4
+      },
+      {
+        "left": "HookOn",
+        "right": "14",
+        "indent": 4
+      },
+      {
+        "left": "",
+        "right": "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF",
+        "indent": 4
+      },
+      {
+        "left": "UINT256",
+        "right": "5",
+        "indent": 4
+      },
+      {
+        "left": "field uncommon",
+        "right": "0",
+        "indent": 4
+      },
+      {
+        "left": "HookNamespace",
+        "right": "20",
+        "indent": 4
+      },
+      {
+        "left": "",
+        "right": "0000000000000000000000000000000000000000000000000000000000000000",
+        "indent": 4
+      },
+      {
+        "left": "BLOB",
+        "right": "7",
+        "indent": 4
+      },
+      {
+        "left": "CreateCode",
+        "right": "B",
+        "indent": 4
+      },
+      {
+        "left": "1 byte length 9",
+        "right": "09",
+        "indent": 4
+      },
+      {
+        "left": "",
+        "right": "0061736D0100000001",
+        "indent": 4
+      },
+      {
+        "left": "OBJECT",
+        "right": "E",
+        "indent": 4
+      },
+      {
+        "left": "ObjectEndMarker",
+        "right": "1",
+        "indent": 4
+      },
+      {
+        "left": "ARRAY",
+        "right": "F",
+        "indent": 2
+      },
+      {
+        "left": "ArrayEndMarker",
+        "right": "1",
+        "indent": 2
+      }
+    ],
+    "status": "Looks like a valid STObject.",
+    "textarea": "1200162100005359240000000A684000000000000064811493B89AFCAD4C8EAC2B131C1331FEF12AE1522BBEFBEE22000000015014000000000000000000000000000000000000000000000000000000000000003E501FAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA5020BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBF013E017701802ABCD7019020102E1F1E1EE1014000022000000015014FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF502000000000000000000000000000000000000000000000000000000000000000007B090061736D0100000001E1F1"
+  },
+  "remit": {
+    "input": "12005F2100005359240000000B68400000000000000C701A04DEADBEEF811493B89AFCAD4C8EAC2B131C1331FEF12AE1522BBE831400000000000000000000000000000000000000018063140000000000000000000000000000000000000001E05C220000000150153333333333333333333333333333333333333333333333333333333333333333750868747470733A2F2FE1F05CE05B6140000000000003E8E1E05B61D4871AFD498D0000000000000000000000000000555344000000000093B89AFCAD4C8EAC2B131C1331FEF12AE1522BBEE1F10013634011111111111111111111111111111111111111111111111111111111111111112222222222222222222222222222222222222222222222222222222222222222",
+    "rows": [
+      {
+        "left": "UINT16",
+        "right": "1",
+        "indent": 0
+      },
+      {
+        "left": "TransactionType",
+        "right": "2",
+        "indent": 0
+      },
+      {
+        "left": "",
+        "right": "005F",
+        "indent": 0
+      },
+      {
+        "left": "UINT32",
+        "right": "2",
+        "indent": 0
+      },
+      {
+        "left": "NetworkID",
+        "right": "1",
+        "indent": 0
+      },
+      {
+        "left": "",
+        "right": "00005359",
+        "indent": 0
+      },
+      {
+        "left": "UINT32",
+        "right": "2",
+        "indent": 0
+      },
+      {
+        "left": "Sequence",
+        "right": "4",
+        "indent": 0
+      },
+      {
+        "left": "",
+        "right": "0000000B",
+        "indent": 0
+      },
+      {
+        "left": "AMOUNT",
+        "right": "6",
+        "indent": 0
+      },
+      {
+        "left": "Fee",
+        "right": "8",
+        "indent": 0
+      },
+      {
+        "left": "Flags",
+        "right": "4Bit 0 (XAH Bit) 1 (Sign Bit + Positve) 00 (First bits of drops integer)",
+        "indent": 0
+      },
+      {
+        "left": "XAH Drops",
+        "right": "00000000000000CDec 12 (XAH Drops including two bits above)",
+        "indent": 0
+      },
+      {
+        "left": "BLOB",
+        "right": "7",
+        "indent": 0
+      },
+      {
+        "left": "field uncommon",
+        "right": "0",
+        "indent": 0
+      },
+      {
+        "left": "Blob",
+        "right": "1A",
+        "indent": 0
+      },
+      {
+        "left": "1 byte length 4",
+        "right": "04",
+        "indent": 0
+      },
+      {
+        "left": "",
+        "right": "DEADBEEF",
+        "indent": 0
+      },
+      {
+        "left": "ACCOUNTID",
+        "right": "8",
+        "indent": 0
+      },
+      {
+        "left": "Account",
+        "right": "1",
+        "indent": 0
+      },
+      {
+        "left": "account vl prefix",
+        "right": "14",
+        "indent": 0
+      },
+      {
+        "left": "",
+        "right": "93B89AFCAD4C8EAC2B131C1331FEF12AE1522BBE",
+        "indent": 0
+      },
+      {
+        "left": "ACCOUNTID",
+        "right": "8",
+        "indent": 0
+      },
+      {
+        "left": "Destination",
+        "right": "3",
+        "indent": 0
+      },
+      {
+        "left": "account vl prefix",
+        "right": "14",
+        "indent": 0
+      },
+      {
+        "left": "",
+        "right": "0000000000000000000000000000000000000001",
+        "indent": 0
+      },
+      {
+        "left": "ACCOUNTID",
+        "right": "8",
+        "indent": 0
+      },
+      {
+        "left": "field uncommon",
+        "right": "0",
+        "indent": 0
+      },
+      {
+        "left": "Inform",
+        "right": "63",
+        "indent": 0
+      },
+      {
+        "left": "account vl prefix",
+        "right": "14",
+        "indent": 0
+      },
+      {
+        "left": "",
+        "right": "0000000000000000000000000000000000000001",
+        "indent": 0
+      },
+      {
+        "left": "OBJECT",
+        "right": "E",
+        "indent": 0
+      },
+      {
+        "left": "field uncommon",
+        "right": "0",
+        "indent": 0
+      },
+      {
+        "left": "MintURIToken",
+        "right": "5C",
+        "indent": 0
+      },
+      {
+        "left": "UINT32",
+        "right": "2",
+        "indent": 2
+      },
+      {
+        "left": "Flags",
+        "right": "2",
+        "indent": 2
+      },
+      {
+        "left": "",
+        "right": "00000001",
+        "indent": 2
+      },
+      {
+        "left": "UINT256",
+        "right": "5",
+        "indent": 2
+      },
+      {
+        "left": "field uncommon",
+        "right": "0",
+        "indent": 2
+      },
+      {
+        "left": "Digest",
+        "right": "15",
+        "indent": 2
+      },
+      {
+        "left": "",
+        "right": "3333333333333333333333333333333333333333333333333333333333333333",
+        "indent": 2
+      },
+      {
+        "left": "BLOB",
+        "right": "7",
+        "indent": 2
+      },
+      {
+        "left": "URI",
+        "right": "5",
+        "indent": 2
+      },
+      {
+        "left": "1 byte length 8",
+        "right": "08",
+        "indent": 2
+      },
+      {
+        "left": "",
+        "right": "68747470733A2F2F",
+        "indent": 2
+      },
+      {
+        "left": "OBJECT",
+        "right": "E",
+        "indent": 2
+      },
+      {
+        "left": "ObjectEndMarker",
+        "right": "1",
+        "indent": 2
+      },
+      {
+        "left": "ARRAY",
+        "right": "F",
+        "indent": 0
+      },
+      {
+        "left": "field uncommon",
+        "right": "0",
+        "indent": 0
+      },
+      {
+        "left": "Amounts",
+        "right": "5C",
+        "indent": 0
+      },
+      {
+        "left": "OBJECT",
+        "right": "E",
+        "indent": 2
+      },
+      {
+        "left": "field uncommon",
+        "right": "0",
+        "indent": 2
+      },
+      {
+        "left": "AmountEntry",
+        "right": "5B",
+        "indent": 2
+      },
+      {
+        "left": "AMOUNT",
+        "right": "6",
+        "indent": 4
+      },
+      {
+        "left": "Amount",
+        "right": "1",
+        "indent": 4
+      },
+      {
+        "left": "Flags",
+        "right": "4Bit 0 (XAH Bit) 1 (Sign Bit + Positve) 00 (First bits of drops integer)",
+        "indent": 4
+      },
+      {
+        "left": "XAH Drops",
+        "right": "0000000000003E8Dec 1000 (XAH Drops including two bits above)",
+        "indent": 4
+      },
+      {
+        "left": "OBJECT",
+        "right": "E",
+        "indent": 4
+      },
+      {
+        "left": "ObjectEndMarker",
+        "right": "1",
+        "indent": 4
+      },
+      {
+        "left": "OBJECT",
+        "right": "E",
+        "indent": 2
+      },
+      {
+        "left": "field uncommon",
+        "right": "0",
+        "indent": 2
+      },
+      {
+        "left": "AmountEntry",
+        "right": "5B",
+        "indent": 2
+      },
+      {
+        "left": "AMOUNT",
+        "right": "6",
+        "indent": 4
+      },
+      {
+        "left": "Amount",
+        "right": "1",
+        "indent": 4
+      },
+      {
+        "left": "Flags + Exponent",
+        "right": "D48Bit 1 (Not XRP Bit) 1 (Sign Bit + Positive) 01010010 (Exponent Raw: 82, Adjusted: -15) 00 (First two bits of mantissa)",
+        "indent": 4
+      },
+      {
+        "left": "Mantissa",
+        "right": "71AFD498D0000Dec 2000000000000000 (Mantissa including two bits above)",
+        "indent": 4
+      },
+      {
+        "left": "Currency Code",
+        "right": "0000000000000000000000005553440000000000Asc USD",
+        "indent": 4
+      },
+      {
+        "left": "Issuer",
+        "right": "93B89AFCAD4C8EAC2B131C1331FEF12AE1522BBE",
+        "indent": 4
+      },
+      {
+        "left": "OBJECT",
+        "right": "E",
+        "indent": 4
+      },
+      {
+        "left": "ObjectEndMarker",
+        "right": "1",
+        "indent": 4
+      },
+      {
+        "left": "ARRAY",
+        "right": "F",
+        "indent": 2
+      },
+      {
+        "left": "ArrayEndMarker",
+        "right": "1",
+        "indent": 2
+      },
+      {
+        "left": "type uncommon",
+        "right": "0",
+        "indent": 0
+      },
+      {
+        "left": "both type and field uncommon",
+        "right": "0",
+        "indent": 0
+      },
+      {
+        "left": "VECTOR256",
+        "right": "13",
+        "indent": 0
+      },
+      {
+        "left": "URITokenIDs",
+        "right": "63",
+        "indent": 0
+      },
+      {
+        "left": "1 byte length 64",
+        "right": "40",
+        "indent": 0
+      },
+      {
+        "left": "hash 0",
+        "right": "1111111111111111111111111111111111111111111111111111111111111111",
+        "indent": 0
+      },
+      {
+        "left": "hash 1",
+        "right": "2222222222222222222222222222222222222222222222222222222222222222",
+        "indent": 0
+      }
+    ],
+    "status": "Looks like a valid STObject.",
+    "textarea": "12005F2100005359240000000B68400000000000000C701A04DEADBEEF811493B89AFCAD4C8EAC2B131C1331FEF12AE1522BBE831400000000000000000000000000000000000000018063140000000000000000000000000000000000000001E05C220000000150153333333333333333333333333333333333333333333333333333333333333333750868747470733A2F2FE1F05CE05B6140000000000003E8E1E05B61D4871AFD498D0000000000000000000000000000555344000000000093B89AFCAD4C8EAC2B131C1331FEF12AE1522BBEE1F10013634011111111111111111111111111111111111111111111111111111111111111112222222222222222222222222222222222222222222222222222222222222222"
+  },
+  "invoke_2byte_blob": {
+    "input": "120063240000000C68400000000000000C701AC297000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000811493B89AFCAD4C8EAC2B131C1331FEF12AE1522BBE83140000000000000000000000000000000000000001F013E01770180101701914FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE1F1",
+    "rows": [
+      {
+        "left": "UINT16",
+        "right": "1",
+        "indent": 0
+      },
+      {
+        "left": "TransactionType",
+        "right": "2",
+        "indent": 0
+      },
+      {
+        "left": "",
+        "right": "0063",
+        "indent": 0
+      },
+      {
+        "left": "UINT32",
+        "right": "2",
+        "indent": 0
+      },
+      {
+        "left": "Sequence",
+        "right": "4",
+        "indent": 0
+      },
+      {
+        "left": "",
+        "right": "0000000C",
+        "indent": 0
+      },
+      {
+        "left": "AMOUNT",
+        "right": "6",
+        "indent": 0
+      },
+      {
+        "left": "Fee",
+        "right": "8",
+        "indent": 0
+      },
+      {
+        "left": "Flags",
+        "right": "4Bit 0 (XAH Bit) 1 (Sign Bit + Positve) 00 (First bits of drops integer)",
+        "indent": 0
+      },
+      {
+        "left": "XAH Drops",
+        "right": "00000000000000CDec 12 (XAH Drops including two bits above)",
+        "indent": 0
+      },
+      {
+        "left": "BLOB",
+        "right": "7",
+        "indent": 0
+      },
+      {
+        "left": "field uncommon",
+        "right": "0",
+        "indent": 0
+      },
+      {
+        "left": "Blob",
+        "right": "1A",
+        "indent": 0
+      },
+      {
+        "left": "2 byte length 600",
+        "right": "C297",
+        "indent": 0
+      },
+      {
+        "left": "",
+        "right": "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "indent": 0
+      },
+      {
+        "left": "ACCOUNTID",
+        "right": "8",
+        "indent": 0
+      },
+      {
+        "left": "Account",
+        "right": "1",
+        "indent": 0
+      },
+      {
+        "left": "account vl prefix",
+        "right": "14",
+        "indent": 0
+      },
+      {
+        "left": "",
+        "right": "93B89AFCAD4C8EAC2B131C1331FEF12AE1522BBE",
+        "indent": 0
+      },
+      {
+        "left": "ACCOUNTID",
+        "right": "8",
+        "indent": 0
+      },
+      {
+        "left": "Destination",
+        "right": "3",
+        "indent": 0
+      },
+      {
+        "left": "account vl prefix",
+        "right": "14",
+        "indent": 0
+      },
+      {
+        "left": "",
+        "right": "0000000000000000000000000000000000000001",
+        "indent": 0
+      },
+      {
+        "left": "ARRAY",
+        "right": "F",
+        "indent": 0
+      },
+      {
+        "left": "field uncommon",
+        "right": "0",
+        "indent": 0
+      },
+      {
+        "left": "HookParameters",
+        "right": "13",
+        "indent": 0
+      },
+      {
+        "left": "OBJECT",
+        "right": "E",
+        "indent": 2
+      },
+      {
+        "left": "field uncommon",
+        "right": "0",
+        "indent": 2
+      },
+      {
+        "left": "HookParameter",
+        "right": "17",
+        "indent": 2
+      },
+      {
+        "left": "BLOB",
+        "right": "7",
+        "indent": 4
+      },
+      {
+        "left": "field uncommon",
+        "right": "0",
+        "indent": 4
+      },
+      {
+        "left": "HookParameterName",
+        "right": "18",
+        "indent": 4
+      },
+      {
+        "left": "1 byte length 1",
+        "right": "01",
+        "indent": 4
+      },
+      {
+        "left": "",
+        "right": "01",
+        "indent": 4
+      },
+      {
+        "left": "BLOB",
+        "right": "7",
+        "indent": 4
+      },
+      {
+        "left": "field uncommon",
+        "right": "0",
+        "indent": 4
+      },
+      {
+        "left": "HookParameterValue",
+        "right": "19",
+        "indent": 4
+      },
+      {
+        "left": "1 byte length 20",
+        "right": "14",
+        "indent": 4
+      },
+      {
+        "left": "",
+        "right": "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF",
+        "indent": 4
+      },
+      {
+        "left": "OBJECT",
+        "right": "E",
+        "indent": 4
+      },
+      {
+        "left": "ObjectEndMarker",
+        "right": "1",
+        "indent": 4
+      },
+      {
+        "left": "ARRAY",
+        "right": "F",
+        "indent": 2
+      },
+      {
+        "left": "ArrayEndMarker",
+        "right": "1",
+        "indent": 2
+      }
+    ],
+    "status": "Looks like a valid STObject.",
+    "textarea": "120063240000000C68400000000000000C701AC297000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000811493B89AFCAD4C8EAC2B131C1331FEF12AE1522BBE83140000000000000000000000000000000000000001F013E01770180101701914FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE1F1"
+  },
+  "claimreward": {
+    "input": "120062240000000D68400000000000000C811493B89AFCAD4C8EAC2B131C1331FEF12AE1522BBE84140000000000000000000000000000000000000001",
+    "rows": [
+      {
+        "left": "UINT16",
+        "right": "1",
+        "indent": 0
+      },
+      {
+        "left": "TransactionType",
+        "right": "2",
+        "indent": 0
+      },
+      {
+        "left": "",
+        "right": "0062",
+        "indent": 0
+      },
+      {
+        "left": "UINT32",
+        "right": "2",
+        "indent": 0
+      },
+      {
+        "left": "Sequence",
+        "right": "4",
+        "indent": 0
+      },
+      {
+        "left": "",
+        "right": "0000000D",
+        "indent": 0
+      },
+      {
+        "left": "AMOUNT",
+        "right": "6",
+        "indent": 0
+      },
+      {
+        "left": "Fee",
+        "right": "8",
+        "indent": 0
+      },
+      {
+        "left": "Flags",
+        "right": "4Bit 0 (XAH Bit) 1 (Sign Bit + Positve) 00 (First bits of drops integer)",
+        "indent": 0
+      },
+      {
+        "left": "XAH Drops",
+        "right": "00000000000000CDec 12 (XAH Drops including two bits above)",
+        "indent": 0
+      },
+      {
+        "left": "ACCOUNTID",
+        "right": "8",
+        "indent": 0
+      },
+      {
+        "left": "Account",
+        "right": "1",
+        "indent": 0
+      },
+      {
+        "left": "account vl prefix",
+        "right": "14",
+        "indent": 0
+      },
+      {
+        "left": "",
+        "right": "93B89AFCAD4C8EAC2B131C1331FEF12AE1522BBE",
+        "indent": 0
+      },
+      {
+        "left": "ACCOUNTID",
+        "right": "8",
+        "indent": 0
+      },
+      {
+        "left": "Issuer",
+        "right": "4",
+        "indent": 0
+      },
+      {
+        "left": "account vl prefix",
+        "right": "14",
+        "indent": 0
+      },
+      {
+        "left": "",
+        "right": "0000000000000000000000000000000000000001",
+        "indent": 0
+      }
+    ],
+    "status": "Looks like a valid STObject.",
+    "textarea": "120062240000000D68400000000000000C811493B89AFCAD4C8EAC2B131C1331FEF12AE1522BBE84140000000000000000000000000000000000000001"
+  },
+  "signed_payment_memo": {
+    "input": "1200002100005359240000000E61400000000000000168400000000000000C7321EDABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABAB7440CDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCD811493B89AFCAD4C8EAC2B131C1331FEF12AE1522BBE83140000000000000000000000000000000000000001F9EA7C04746578747D0568656C6C6F7E0A746578742F706C61696EE1F1",
+    "rows": [
+      {
+        "left": "UINT16",
+        "right": "1",
+        "indent": 0
+      },
+      {
+        "left": "TransactionType",
+        "right": "2",
+        "indent": 0
+      },
+      {
+        "left": "",
+        "right": "0000",
+        "indent": 0
+      },
+      {
+        "left": "UINT32",
+        "right": "2",
+        "indent": 0
+      },
+      {
+        "left": "NetworkID",
+        "right": "1",
+        "indent": 0
+      },
+      {
+        "left": "",
+        "right": "00005359",
+        "indent": 0
+      },
+      {
+        "left": "UINT32",
+        "right": "2",
+        "indent": 0
+      },
+      {
+        "left": "Sequence",
+        "right": "4",
+        "indent": 0
+      },
+      {
+        "left": "",
+        "right": "0000000E",
+        "indent": 0
+      },
+      {
+        "left": "AMOUNT",
+        "right": "6",
+        "indent": 0
+      },
+      {
+        "left": "Amount",
+        "right": "1",
+        "indent": 0
+      },
+      {
+        "left": "Flags",
+        "right": "4Bit 0 (XAH Bit) 1 (Sign Bit + Positve) 00 (First bits of drops integer)",
+        "indent": 0
+      },
+      {
+        "left": "XAH Drops",
+        "right": "000000000000001Dec 1 (XAH Drops including two bits above)",
+        "indent": 0
+      },
+      {
+        "left": "AMOUNT",
+        "right": "6",
+        "indent": 0
+      },
+      {
+        "left": "Fee",
+        "right": "8",
+        "indent": 0
+      },
+      {
+        "left": "Flags",
+        "right": "4Bit 0 (XAH Bit) 1 (Sign Bit + Positve) 00 (First bits of drops integer)",
+        "indent": 0
+      },
+      {
+        "left": "XAH Drops",
+        "right": "00000000000000CDec 12 (XAH Drops including two bits above)",
+        "indent": 0
+      },
+      {
+        "left": "BLOB",
+        "right": "7",
+        "indent": 0
+      },
+      {
+        "left": "SigningPubKey",
+        "right": "3",
+        "indent": 0
+      },
+      {
+        "left": "1 byte length 33",
+        "right": "21",
+        "indent": 0
+      },
+      {
+        "left": "",
+        "right": "EDABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABAB",
+        "indent": 0
+      },
+      {
+        "left": "BLOB",
+        "right": "7",
+        "indent": 0
+      },
+      {
+        "left": "TxnSignature",
+        "right": "4",
+        "indent": 0
+      },
+      {
+        "left": "1 byte length 64",
+        "right": "40",
+        "indent": 0
+      },
+      {
+        "left": "",
+        "right": "CDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCD",
+        "indent": 0
+      },
+      {
+        "left": "ACCOUNTID",
+        "right": "8",
+        "indent": 0
+      },
+      {
+        "left": "Account",
+        "right": "1",
+        "indent": 0
+      },
+      {
+        "left": "account vl prefix",
+        "right": "14",
+        "indent": 0
+      },
+      {
+        "left": "",
+        "right": "93B89AFCAD4C8EAC2B131C1331FEF12AE1522BBE",
+        "indent": 0
+      },
+      {
+        "left": "ACCOUNTID",
+        "right": "8",
+        "indent": 0
+      },
+      {
+        "left": "Destination",
+        "right": "3",
+        "indent": 0
+      },
+      {
+        "left": "account vl prefix",
+        "right": "14",
+        "indent": 0
+      },
+      {
+        "left": "",
+        "right": "0000000000000000000000000000000000000001",
+        "indent": 0
+      },
+      {
+        "left": "ARRAY",
+        "right": "F",
+        "indent": 0
+      },
+      {
+        "left": "Memos",
+        "right": "9",
+        "indent": 0
+      },
+      {
+        "left": "OBJECT",
+        "right": "E",
+        "indent": 2
+      },
+      {
+        "left": "Memo",
+        "right": "A",
+        "indent": 2
+      },
+      {
+        "left": "BLOB",
+        "right": "7",
+        "indent": 4
+      },
+      {
+        "left": "MemoType",
+        "right": "C",
+        "indent": 4
+      },
+      {
+        "left": "1 byte length 4",
+        "right": "04",
+        "indent": 4
+      },
+      {
+        "left": "",
+        "right": "74657874",
+        "indent": 4
+      },
+      {
+        "left": "BLOB",
+        "right": "7",
+        "indent": 4
+      },
+      {
+        "left": "MemoData",
+        "right": "D",
+        "indent": 4
+      },
+      {
+        "left": "1 byte length 5",
+        "right": "05",
+        "indent": 4
+      },
+      {
+        "left": "",
+        "right": "68656C6C6F",
+        "indent": 4
+      },
+      {
+        "left": "BLOB",
+        "right": "7",
+        "indent": 4
+      },
+      {
+        "left": "MemoFormat",
+        "right": "E",
+        "indent": 4
+      },
+      {
+        "left": "1 byte length 10",
+        "right": "0A",
+        "indent": 4
+      },
+      {
+        "left": "",
+        "right": "746578742F706C61696E",
+        "indent": 4
+      },
+      {
+        "left": "OBJECT",
+        "right": "E",
+        "indent": 4
+      },
+      {
+        "left": "ObjectEndMarker",
+        "right": "1",
+        "indent": 4
+      },
+      {
+        "left": "ARRAY",
+        "right": "F",
+        "indent": 2
+      },
+      {
+        "left": "ArrayEndMarker",
+        "right": "1",
+        "indent": 2
+      }
+    ],
+    "status": "Looks like a valid STObject.",
+    "textarea": "1200002100005359240000000E61400000000000000168400000000000000C7321EDABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABAB7440CDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCD811493B89AFCAD4C8EAC2B131C1331FEF12AE1522BBE83140000000000000000000000000000000000000001F9EA7C04746578747D0568656C6C6F7E0A746578742F706C61696EE1F1"
+  }
+}
