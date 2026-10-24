@@ -1,0 +1,2791 @@
+{
+  "readme_ledger_object": {
+    "input": "201C000000066012D5871ACEB9D05530534F4C4F000000000000000000000000000000001EB3EAA3AD86242E1D51DC502DD6566BD39E06A6F8E511007225037E8CAF55A38F35A62CADEDF4CC5419D1493ED81BCB37C4913AEB1DF93D0FCC559D068A165613ABCF502A974AB6ED688E10930A48E7C217C43035E82E48F84D56269C031AF1E6629608C332EE2CE8B9534F4C4F000000000000000000000000000000000000000000000000000000000000000000000001E1E72200220000370000000000000000380000000000000000629608D56313DFA1E5534F4C4F000000000000000000000000000000000000000000000000000000000000000000000001668000000000000000534F4C4F000000000000000000000000000000001EB3EAA3AD86242E1D51DC502DD6566BD39E06A667D68E35FA931A0000534F4C4F00000000000000000000000000000000655709D834877E78775F75F5CEA092582F74C636E1E1E511007225037E86F55597C65C66221B987306758FCC20CDA4666A3D86CCC360F6664A840F43EF94F3585618254A083849DD60EF85FDA66EE4F411A2D4D9682283D659EE11C63344F46B76E662958FCD2303EB0810534F4C4F000000000000000000000000000000000000000000000000000000000000000000000001E1E72200220000370000000000000035380000000000000000629588B225BA5E0810534F4C4F000000000000000000000000000000000000000000000000000000000000000000000001668000000000000000534F4C4F000000000000000000000000000000001EB3EAA3AD86242E1D51DC502DD6566BD39E06A667D6038D7EA4C68000534F4C4F000000000000000000000000000000006C1D22888CF2CC88579D71FE0BE6890FE2268BF3E1E1E511006125037E86F55597C65C66221B987306758FCC20CDA4666A3D86CCC360F6664A840F43EF94F358568C4F456312F02D5199BCB1FB8F657BF19675288E3F4EBF2AFCFB5A1253788404E624000000A9624000000117A5E215E1E7220080000024000000AA2D0000000B41833237B8665D2F4E00135E8DE646589F624000000117A5E209770878756D6D2E61707081146C1D22888CF2CC88579D71FE0BE6890FE2268BF3E1E1F1031000",
+    "rows": [
+      {
+        "left": "UINT32",
+        "right": "2",
+        "indent": 0
+      },
+      {
+        "left": "field uncommon",
+        "right": "0",
+        "indent": 0
+      },
+      {
+        "left": "TransactionIndex",
+        "right": "1C",
+        "indent": 0
+      },
+      {
+        "left": "",
+        "right": "00000006",
+        "indent": 0
+      },
+      {
+        "left": "AMOUNT",
+        "right": "6",
+        "indent": 0
+      },
+      {
+        "left": "field uncommon",
+        "right": "0",
+        "indent": 0
+      },
+      {
+        "left": "DeliveredAmount",
+        "right": "12",
+        "indent": 0
+      },
+      {
+        "left": "Flags + Exponent",
+        "right": "D58Bit 1 (Not XRP Bit) 1 (Sign Bit + Positive) 01010110 (Exponent Raw: 86, Adjusted: -11) 00 (First two bits of mantissa)",
+        "indent": 0
+      },
+      {
+        "left": "Mantissa",
+        "right": "71ACEB9D05530Dec 1999800019998000 (Mantissa including two bits above)",
+        "indent": 0
+      },
+      {
+        "left": "Currency Code",
+        "right": "534F4C4F00000000000000000000000000000000Asc",
+        "indent": 0
+      },
+      {
+        "left": "Issuer",
+        "right": "1EB3EAA3AD86242E1D51DC502DD6566BD39E06A6",
+        "indent": 0
+      },
+      {
+        "left": "ARRAY",
+        "right": "F",
+        "indent": 0
+      },
+      {
+        "left": "AffectedNodes",
+        "right": "8",
+        "indent": 0
+      },
+      {
+        "left": "OBJECT",
+        "right": "E",
+        "indent": 2
+      },
+      {
+        "left": "ModifiedNode",
+        "right": "5",
+        "indent": 2
+      },
+      {
+        "left": "UINT16",
+        "right": "1",
+        "indent": 4
+      },
+      {
+        "left": "LedgerEntryType",
+        "right": "1",
+        "indent": 4
+      },
+      {
+        "left": "",
+        "right": "0072",
+        "indent": 4
+      },
+      {
+        "left": "UINT32",
+        "right": "2",
+        "indent": 4
+      },
+      {
+        "left": "PreviousTxnLgrSeq",
+        "right": "5",
+        "indent": 4
+      },
+      {
+        "left": "",
+        "right": "037E8CAF",
+        "indent": 4
+      },
+      {
+        "left": "UINT256",
+        "right": "5",
+        "indent": 4
+      },
+      {
+        "left": "PreviousTxnID",
+        "right": "5",
+        "indent": 4
+      },
+      {
+        "left": "",
+        "right": "A38F35A62CADEDF4CC5419D1493ED81BCB37C4913AEB1DF93D0FCC559D068A16",
+        "indent": 4
+      },
+      {
+        "left": "UINT256",
+        "right": "5",
+        "indent": 4
+      },
+      {
+        "left": "LedgerIndex",
+        "right": "6",
+        "indent": 4
+      },
+      {
+        "left": "",
+        "right": "13ABCF502A974AB6ED688E10930A48E7C217C43035E82E48F84D56269C031AF1",
+        "indent": 4
+      },
+      {
+        "left": "OBJECT",
+        "right": "E",
+        "indent": 4
+      },
+      {
+        "left": "PreviousFields",
+        "right": "6",
+        "indent": 4
+      },
+      {
+        "left": "AMOUNT",
+        "right": "6",
+        "indent": 6
+      },
+      {
+        "left": "Balance",
+        "right": "2",
+        "indent": 6
+      },
+      {
+        "left": "Flags + Exponent",
+        "right": "960Bit 1 (Not XRP Bit) 0 (Sign Bit - Negative) 01011000 (Exponent Raw: 88, Adjusted: -9) 00 (First two bits of mantissa)",
+        "indent": 6
+      },
+      {
+        "left": "Mantissa",
+        "right": "8C332EE2CE8B9Dec 2466423325386937 (Mantissa including two bits above)",
+        "indent": 6
+      },
+      {
+        "left": "Currency Code",
+        "right": "534F4C4F00000000000000000000000000000000Asc",
+        "indent": 6
+      },
+      {
+        "left": "Issuer",
+        "right": "0000000000000000000000000000000000000001",
+        "indent": 6
+      },
+      {
+        "left": "OBJECT",
+        "right": "E",
+        "indent": 6
+      },
+      {
+        "left": "ObjectEndMarker",
+        "right": "1",
+        "indent": 6
+      },
+      {
+        "left": "OBJECT",
+        "right": "E",
+        "indent": 4
+      },
+      {
+        "left": "FinalFields",
+        "right": "7",
+        "indent": 4
+      },
+      {
+        "left": "UINT32",
+        "right": "2",
+        "indent": 6
+      },
+      {
+        "left": "Flags",
+        "right": "2",
+        "indent": 6
+      },
+      {
+        "left": "",
+        "right": "00220000",
+        "indent": 6
+      },
+      {
+        "left": "UINT64",
+        "right": "3",
+        "indent": 6
+      },
+      {
+        "left": "LowNode",
+        "right": "7",
+        "indent": 6
+      },
+      {
+        "left": "",
+        "right": "0000000000000000",
+        "indent": 6
+      },
+      {
+        "left": "UINT64",
+        "right": "3",
+        "indent": 6
+      },
+      {
+        "left": "HighNode",
+        "right": "8",
+        "indent": 6
+      },
+      {
+        "left": "",
+        "right": "0000000000000000",
+        "indent": 6
+      },
+      {
+        "left": "AMOUNT",
+        "right": "6",
+        "indent": 6
+      },
+      {
+        "left": "Balance",
+        "right": "2",
+        "indent": 6
+      },
+      {
+        "left": "Flags + Exponent",
+        "right": "960Bit 1 (Not XRP Bit) 0 (Sign Bit - Negative) 01011000 (Exponent Raw: 88, Adjusted: -9) 00 (First two bits of mantissa)",
+        "indent": 6
+      },
+      {
+        "left": "Mantissa",
+        "right": "8D56313DFA1E5Dec 2486421325586917 (Mantissa including two bits above)",
+        "indent": 6
+      },
+      {
+        "left": "Currency Code",
+        "right": "534F4C4F00000000000000000000000000000000Asc",
+        "indent": 6
+      },
+      {
+        "left": "Issuer",
+        "right": "0000000000000000000000000000000000000001",
+        "indent": 6
+      },
+      {
+        "left": "AMOUNT",
+        "right": "6",
+        "indent": 6
+      },
+      {
+        "left": "LowLimit",
+        "right": "6",
+        "indent": 6
+      },
+      {
+        "left": "Flags + Exponent",
+        "right": "800Bit 1 (Not XRP Bit) 0 (Sign Bit - Negative) 00000000 (Exponent Raw: 0, Adjusted: -97) 00 (First two bits of mantissa)",
+        "indent": 6
+      },
+      {
+        "left": "Mantissa",
+        "right": "0000000000000Dec 0 (Mantissa including two bits above)",
+        "indent": 6
+      },
+      {
+        "left": "Currency Code",
+        "right": "534F4C4F00000000000000000000000000000000Asc",
+        "indent": 6
+      },
+      {
+        "left": "Issuer",
+        "right": "1EB3EAA3AD86242E1D51DC502DD6566BD39E06A6",
+        "indent": 6
+      },
+      {
+        "left": "AMOUNT",
+        "right": "6",
+        "indent": 6
+      },
+      {
+        "left": "HighLimit",
+        "right": "7",
+        "indent": 6
+      },
+      {
+        "left": "Flags + Exponent",
+        "right": "D68Bit 1 (Not XRP Bit) 1 (Sign Bit + Positive) 01011010 (Exponent Raw: 90, Adjusted: -7) 00 (First two bits of mantissa)",
+        "indent": 6
+      },
+      {
+        "left": "Mantissa",
+        "right": "E35FA931A0000Dec 4000000000000000 (Mantissa including two bits above)",
+        "indent": 6
+      },
+      {
+        "left": "Currency Code",
+        "right": "534F4C4F00000000000000000000000000000000Asc",
+        "indent": 6
+      },
+      {
+        "left": "Issuer",
+        "right": "655709D834877E78775F75F5CEA092582F74C636",
+        "indent": 6
+      },
+      {
+        "left": "OBJECT",
+        "right": "E",
+        "indent": 6
+      },
+      {
+        "left": "ObjectEndMarker",
+        "right": "1",
+        "indent": 6
+      },
+      {
+        "left": "OBJECT",
+        "right": "E",
+        "indent": 4
+      },
+      {
+        "left": "ObjectEndMarker",
+        "right": "1",
+        "indent": 4
+      },
+      {
+        "left": "OBJECT",
+        "right": "E",
+        "indent": 2
+      },
+      {
+        "left": "ModifiedNode",
+        "right": "5",
+        "indent": 2
+      },
+      {
+        "left": "UINT16",
+        "right": "1",
+        "indent": 4
+      },
+      {
+        "left": "LedgerEntryType",
+        "right": "1",
+        "indent": 4
+      },
+      {
+        "left": "",
+        "right": "0072",
+        "indent": 4
+      },
+      {
+        "left": "UINT32",
+        "right": "2",
+        "indent": 4
+      },
+      {
+        "left": "PreviousTxnLgrSeq",
+        "right": "5",
+        "indent": 4
+      },
+      {
+        "left": "",
+        "right": "037E86F5",
+        "indent": 4
+      },
+      {
+        "left": "UINT256",
+        "right": "5",
+        "indent": 4
+      },
+      {
+        "left": "PreviousTxnID",
+        "right": "5",
+        "indent": 4
+      },
+      {
+        "left": "",
+        "right": "97C65C66221B987306758FCC20CDA4666A3D86CCC360F6664A840F43EF94F358",
+        "indent": 4
+      },
+      {
+        "left": "UINT256",
+        "right": "5",
+        "indent": 4
+      },
+      {
+        "left": "LedgerIndex",
+        "right": "6",
+        "indent": 4
+      },
+      {
+        "left": "",
+        "right": "18254A083849DD60EF85FDA66EE4F411A2D4D9682283D659EE11C63344F46B76",
+        "indent": 4
+      },
+      {
+        "left": "OBJECT",
+        "right": "E",
+        "indent": 4
+      },
+      {
+        "left": "PreviousFields",
+        "right": "6",
+        "indent": 4
+      },
+      {
+        "left": "AMOUNT",
+        "right": "6",
+        "indent": 6
+      },
+      {
+        "left": "Balance",
+        "right": "2",
+        "indent": 6
+      },
+      {
+        "left": "Flags + Exponent",
+        "right": "958Bit 1 (Not XRP Bit) 0 (Sign Bit - Negative) 01010110 (Exponent Raw: 86, Adjusted: -11) 00 (First two bits of mantissa)",
+        "indent": 6
+      },
+      {
+        "left": "Mantissa",
+        "right": "FCD2303EB0810Dec 4447674923943952 (Mantissa including two bits above)",
+        "indent": 6
+      },
+      {
+        "left": "Currency Code",
+        "right": "534F4C4F00000000000000000000000000000000Asc",
+        "indent": 6
+      },
+      {
+        "left": "Issuer",
+        "right": "0000000000000000000000000000000000000001",
+        "indent": 6
+      },
+      {
+        "left": "OBJECT",
+        "right": "E",
+        "indent": 6
+      },
+      {
+        "left": "ObjectEndMarker",
+        "right": "1",
+        "indent": 6
+      },
+      {
+        "left": "OBJECT",
+        "right": "E",
+        "indent": 4
+      },
+      {
+        "left": "FinalFields",
+        "right": "7",
+        "indent": 4
+      },
+      {
+        "left": "UINT32",
+        "right": "2",
+        "indent": 6
+      },
+      {
+        "left": "Flags",
+        "right": "2",
+        "indent": 6
+      },
+      {
+        "left": "",
+        "right": "00220000",
+        "indent": 6
+      },
+      {
+        "left": "UINT64",
+        "right": "3",
+        "indent": 6
+      },
+      {
+        "left": "LowNode",
+        "right": "7",
+        "indent": 6
+      },
+      {
+        "left": "",
+        "right": "0000000000000035",
+        "indent": 6
+      },
+      {
+        "left": "UINT64",
+        "right": "3",
+        "indent": 6
+      },
+      {
+        "left": "HighNode",
+        "right": "8",
+        "indent": 6
+      },
+      {
+        "left": "",
+        "right": "0000000000000000",
+        "indent": 6
+      },
+      {
+        "left": "AMOUNT",
+        "right": "6",
+        "indent": 6
+      },
+      {
+        "left": "Balance",
+        "right": "2",
+        "indent": 6
+      },
+      {
+        "left": "Flags + Exponent",
+        "right": "958Bit 1 (Not XRP Bit) 0 (Sign Bit - Negative) 01010110 (Exponent Raw: 86, Adjusted: -11) 00 (First two bits of mantissa)",
+        "indent": 6
+      },
+      {
+        "left": "Mantissa",
+        "right": "8B225BA5E0810Dec 2447674923943952 (Mantissa including two bits above)",
+        "indent": 6
+      },
+      {
+        "left": "Currency Code",
+        "right": "534F4C4F00000000000000000000000000000000Asc",
+        "indent": 6
+      },
+      {
+        "left": "Issuer",
+        "right": "0000000000000000000000000000000000000001",
+        "indent": 6
+      },
+      {
+        "left": "AMOUNT",
+        "right": "6",
+        "indent": 6
+      },
+      {
+        "left": "LowLimit",
+        "right": "6",
+        "indent": 6
+      },
+      {
+        "left": "Flags + Exponent",
+        "right": "800Bit 1 (Not XRP Bit) 0 (Sign Bit - Negative) 00000000 (Exponent Raw: 0, Adjusted: -97) 00 (First two bits of mantissa)",
+        "indent": 6
+      },
+      {
+        "left": "Mantissa",
+        "right": "0000000000000Dec 0 (Mantissa including two bits above)",
+        "indent": 6
+      },
+      {
+        "left": "Currency Code",
+        "right": "534F4C4F00000000000000000000000000000000Asc",
+        "indent": 6
+      },
+      {
+        "left": "Issuer",
+        "right": "1EB3EAA3AD86242E1D51DC502DD6566BD39E06A6",
+        "indent": 6
+      },
+      {
+        "left": "AMOUNT",
+        "right": "6",
+        "indent": 6
+      },
+      {
+        "left": "HighLimit",
+        "right": "7",
+        "indent": 6
+      },
+      {
+        "left": "Flags + Exponent",
+        "right": "D60Bit 1 (Not XRP Bit) 1 (Sign Bit + Positive) 01011000 (Exponent Raw: 88, Adjusted: -9) 00 (First two bits of mantissa)",
+        "indent": 6
+      },
+      {
+        "left": "Mantissa",
+        "right": "38D7EA4C68000Dec 1000000000000000 (Mantissa including two bits above)",
+        "indent": 6
+      },
+      {
+        "left": "Currency Code",
+        "right": "534F4C4F00000000000000000000000000000000Asc",
+        "indent": 6
+      },
+      {
+        "left": "Issuer",
+        "right": "6C1D22888CF2CC88579D71FE0BE6890FE2268BF3",
+        "indent": 6
+      },
+      {
+        "left": "OBJECT",
+        "right": "E",
+        "indent": 6
+      },
+      {
+        "left": "ObjectEndMarker",
+        "right": "1",
+        "indent": 6
+      },
+      {
+        "left": "OBJECT",
+        "right": "E",
+        "indent": 4
+      },
+      {
+        "left": "ObjectEndMarker",
+        "right": "1",
+        "indent": 4
+      },
+      {
+        "left": "OBJECT",
+        "right": "E",
+        "indent": 2
+      },
+      {
+        "left": "ModifiedNode",
+        "right": "5",
+        "indent": 2
+      },
+      {
+        "left": "UINT16",
+        "right": "1",
+        "indent": 4
+      },
+      {
+        "left": "LedgerEntryType",
+        "right": "1",
+        "indent": 4
+      },
+      {
+        "left": "",
+        "right": "0061",
+        "indent": 4
+      },
+      {
+        "left": "UINT32",
+        "right": "2",
+        "indent": 4
+      },
+      {
+        "left": "PreviousTxnLgrSeq",
+        "right": "5",
+        "indent": 4
+      },
+      {
+        "left": "",
+        "right": "037E86F5",
+        "indent": 4
+      },
+      {
+        "left": "UINT256",
+        "right": "5",
+        "indent": 4
+      },
+      {
+        "left": "PreviousTxnID",
+        "right": "5",
+        "indent": 4
+      },
+      {
+        "left": "",
+        "right": "97C65C66221B987306758FCC20CDA4666A3D86CCC360F6664A840F43EF94F358",
+        "indent": 4
+      },
+      {
+        "left": "UINT256",
+        "right": "5",
+        "indent": 4
+      },
+      {
+        "left": "LedgerIndex",
+        "right": "6",
+        "indent": 4
+      },
+      {
+        "left": "",
+        "right": "8C4F456312F02D5199BCB1FB8F657BF19675288E3F4EBF2AFCFB5A1253788404",
+        "indent": 4
+      },
+      {
+        "left": "OBJECT",
+        "right": "E",
+        "indent": 4
+      },
+      {
+        "left": "PreviousFields",
+        "right": "6",
+        "indent": 4
+      },
+      {
+        "left": "UINT32",
+        "right": "2",
+        "indent": 6
+      },
+      {
+        "left": "Sequence",
+        "right": "4",
+        "indent": 6
+      },
+      {
+        "left": "",
+        "right": "000000A9",
+        "indent": 6
+      },
+      {
+        "left": "AMOUNT",
+        "right": "6",
+        "indent": 6
+      },
+      {
+        "left": "Balance",
+        "right": "2",
+        "indent": 6
+      },
+      {
+        "left": "Flags",
+        "right": "4Bit 0 (XAH Bit) 1 (Sign Bit + Positve) 00 (First bits of drops integer)",
+        "indent": 6
+      },
+      {
+        "left": "XAH Drops",
+        "right": "000000117A5E215Dec 4691714581 (XAH Drops including two bits above)",
+        "indent": 6
+      },
+      {
+        "left": "OBJECT",
+        "right": "E",
+        "indent": 6
+      },
+      {
+        "left": "ObjectEndMarker",
+        "right": "1",
+        "indent": 6
+      },
+      {
+        "left": "OBJECT",
+        "right": "E",
+        "indent": 4
+      },
+      {
+        "left": "FinalFields",
+        "right": "7",
+        "indent": 4
+      },
+      {
+        "left": "UINT32",
+        "right": "2",
+        "indent": 6
+      },
+      {
+        "left": "Flags",
+        "right": "2",
+        "indent": 6
+      },
+      {
+        "left": "",
+        "right": "00800000",
+        "indent": 6
+      },
+      {
+        "left": "UINT32",
+        "right": "2",
+        "indent": 6
+      },
+      {
+        "left": "Sequence",
+        "right": "4",
+        "indent": 6
+      },
+      {
+        "left": "",
+        "right": "000000AA",
+        "indent": 6
+      },
+      {
+        "left": "UINT32",
+        "right": "2",
+        "indent": 6
+      },
+      {
+        "left": "OwnerCount",
+        "right": "D",
+        "indent": 6
+      },
+      {
+        "left": "",
+        "right": "0000000B",
+        "indent": 6
+      },
+      {
+        "left": "UINT128",
+        "right": "4",
+        "indent": 6
+      },
+      {
+        "left": "EmailHash",
+        "right": "1",
+        "indent": 6
+      },
+      {
+        "left": "",
+        "right": "833237B8665D2F4E00135E8DE646589F",
+        "indent": 6
+      },
+      {
+        "left": "AMOUNT",
+        "right": "6",
+        "indent": 6
+      },
+      {
+        "left": "Balance",
+        "right": "2",
+        "indent": 6
+      },
+      {
+        "left": "Flags",
+        "right": "4Bit 0 (XAH Bit) 1 (Sign Bit + Positve) 00 (First bits of drops integer)",
+        "indent": 6
+      },
+      {
+        "left": "XAH Drops",
+        "right": "000000117A5E209Dec 4691714569 (XAH Drops including two bits above)",
+        "indent": 6
+      },
+      {
+        "left": "BLOB",
+        "right": "7",
+        "indent": 6
+      },
+      {
+        "left": "Domain",
+        "right": "7",
+        "indent": 6
+      },
+      {
+        "left": "1 byte length 8",
+        "right": "08",
+        "indent": 6
+      },
+      {
+        "left": "",
+        "right": "78756D6D2E617070",
+        "indent": 6
+      },
+      {
+        "left": "ACCOUNTID",
+        "right": "8",
+        "indent": 6
+      },
+      {
+        "left": "Account",
+        "right": "1",
+        "indent": 6
+      },
+      {
+        "left": "account vl prefix",
+        "right": "14",
+        "indent": 6
+      },
+      {
+        "left": "",
+        "right": "6C1D22888CF2CC88579D71FE0BE6890FE2268BF3",
+        "indent": 6
+      },
+      {
+        "left": "OBJECT",
+        "right": "E",
+        "indent": 6
+      },
+      {
+        "left": "ObjectEndMarker",
+        "right": "1",
+        "indent": 6
+      },
+      {
+        "left": "OBJECT",
+        "right": "E",
+        "indent": 4
+      },
+      {
+        "left": "ObjectEndMarker",
+        "right": "1",
+        "indent": 4
+      },
+      {
+        "left": "ARRAY",
+        "right": "F",
+        "indent": 2
+      },
+      {
+        "left": "ArrayEndMarker",
+        "right": "1",
+        "indent": 2
+      },
+      {
+        "left": "type uncommon",
+        "right": "0",
+        "indent": 0
+      },
+      {
+        "left": "TransactionResult",
+        "right": "3",
+        "indent": 0
+      },
+      {
+        "left": "UINT8",
+        "right": "10",
+        "indent": 0
+      },
+      {
+        "left": "",
+        "right": "00",
+        "indent": 0
+      }
+    ],
+    "status": "Looks like a valid STObject.",
+    "textarea": "201C000000066012D5871ACEB9D05530534F4C4F000000000000000000000000000000001EB3EAA3AD86242E1D51DC502DD6566BD39E06A6F8E511007225037E8CAF55A38F35A62CADEDF4CC5419D1493ED81BCB37C4913AEB1DF93D0FCC559D068A165613ABCF502A974AB6ED688E10930A48E7C217C43035E82E48F84D56269C031AF1E6629608C332EE2CE8B9534F4C4F000000000000000000000000000000000000000000000000000000000000000000000001E1E72200220000370000000000000000380000000000000000629608D56313DFA1E5534F4C4F000000000000000000000000000000000000000000000000000000000000000000000001668000000000000000534F4C4F000000000000000000000000000000001EB3EAA3AD86242E1D51DC502DD6566BD39E06A667D68E35FA931A0000534F4C4F00000000000000000000000000000000655709D834877E78775F75F5CEA092582F74C636E1E1E511007225037E86F55597C65C66221B987306758FCC20CDA4666A3D86CCC360F6664A840F43EF94F3585618254A083849DD60EF85FDA66EE4F411A2D4D9682283D659EE11C63344F46B76E662958FCD2303EB0810534F4C4F000000000000000000000000000000000000000000000000000000000000000000000001E1E72200220000370000000000000035380000000000000000629588B225BA5E0810534F4C4F000000000000000000000000000000000000000000000000000000000000000000000001668000000000000000534F4C4F000000000000000000000000000000001EB3EAA3AD86242E1D51DC502DD6566BD39E06A667D6038D7EA4C68000534F4C4F000000000000000000000000000000006C1D22888CF2CC88579D71FE0BE6890FE2268BF3E1E1E511006125037E86F55597C65C66221B987306758FCC20CDA4666A3D86CCC360F6664A840F43EF94F358568C4F456312F02D5199BCB1FB8F657BF19675288E3F4EBF2AFCFB5A1253788404E624000000A9624000000117A5E215E1E7220080000024000000AA2D0000000B41833237B8665D2F4E00135E8DE646589F624000000117A5E209770878756D6D2E61707081146C1D22888CF2CC88579D71FE0BE6890FE2268BF3E1E1F1031000"
+  },
+  "payment_paths_memos": {
+    "input": "1200002200000000240000000161D485543DF729C000000000000000000000000000555344000000000093B89AFCAD4C8EAC2B131C1331FEF12AE1522BBE68400000000000000A6940000000000003E87321EDABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABAB7440CDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCD811493B89AFCAD4C8EAC2B131C1331FEF12AE1522BBE83140000000000000000000000000000000000000001F9EA7C04746578747D0568656C6C6FE1F1011201000000000000000000000000000000000000000130000000000000000000000000555344000000000093B89AFCAD4C8EAC2B131C1331FEF12AE1522BBEFF10000000000000000000000000000000000000000000",
+    "rows": [
+      {
+        "left": "UINT16",
+        "right": "1",
+        "indent": 0
+      },
+      {
+        "left": "TransactionType",
+        "right": "2",
+        "indent": 0
+      },
+      {
+        "left": "",
+        "right": "0000",
+        "indent": 0
+      },
+      {
+        "left": "UINT32",
+        "right": "2",
+        "indent": 0
+      },
+      {
+        "left": "Flags",
+        "right": "2",
+        "indent": 0
+      },
+      {
+        "left": "",
+        "right": "00000000",
+        "indent": 0
+      },
+      {
+        "left": "UINT32",
+        "right": "2",
+        "indent": 0
+      },
+      {
+        "left": "Sequence",
+        "right": "4",
+        "indent": 0
+      },
+      {
+        "left": "",
+        "right": "00000001",
+        "indent": 0
+      },
+      {
+        "left": "AMOUNT",
+        "right": "6",
+        "indent": 0
+      },
+      {
+        "left": "Amount",
+        "right": "1",
+        "indent": 0
+      },
+      {
+        "left": "Flags + Exponent",
+        "right": "D48Bit 1 (Not XRP Bit) 1 (Sign Bit + Positive) 01010010 (Exponent Raw: 82, Adjusted: -15) 00 (First two bits of mantissa)",
+        "indent": 0
+      },
+      {
+        "left": "Mantissa",
+        "right": "5543DF729C000Dec 1500000000000000 (Mantissa including two bits above)",
+        "indent": 0
+      },
+      {
+        "left": "Currency Code",
+        "right": "0000000000000000000000005553440000000000Asc USD",
+        "indent": 0
+      },
+      {
+        "left": "Issuer",
+        "right": "93B89AFCAD4C8EAC2B131C1331FEF12AE1522BBE",
+        "indent": 0
+      },
+      {
+        "left": "AMOUNT",
+        "right": "6",
+        "indent": 0
+      },
+      {
+        "left": "Fee",
+        "right": "8",
+        "indent": 0
+      },
+      {
+        "left": "Flags",
+        "right": "4Bit 0 (XAH Bit) 1 (Sign Bit + Positve) 00 (First bits of drops integer)",
+        "indent": 0
+      },
+      {
+        "left": "XAH Drops",
+        "right": "00000000000000ADec 10 (XAH Drops including two bits above)",
+        "indent": 0
+      },
+      {
+        "left": "AMOUNT",
+        "right": "6",
+        "indent": 0
+      },
+      {
+        "left": "SendMax",
+        "right": "9",
+        "indent": 0
+      },
+      {
+        "left": "Flags",
+        "right": "4Bit 0 (XAH Bit) 1 (Sign Bit + Positve) 00 (First bits of drops integer)",
+        "indent": 0
+      },
+      {
+        "left": "XAH Drops",
+        "right": "0000000000003E8Dec 1000 (XAH Drops including two bits above)",
+        "indent": 0
+      },
+      {
+        "left": "BLOB",
+        "right": "7",
+        "indent": 0
+      },
+      {
+        "left": "SigningPubKey",
+        "right": "3",
+        "indent": 0
+      },
+      {
+        "left": "1 byte length 33",
+        "right": "21",
+        "indent": 0
+      },
+      {
+        "left": "",
+        "right": "EDABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABAB",
+        "indent": 0
+      },
+      {
+        "left": "BLOB",
+        "right": "7",
+        "indent": 0
+      },
+      {
+        "left": "TxnSignature",
+        "right": "4",
+        "indent": 0
+      },
+      {
+        "left": "1 byte length 64",
+        "right": "40",
+        "indent": 0
+      },
+      {
+        "left": "",
+        "right": "CDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCD",
+        "indent": 0
+      },
+      {
+        "left": "ACCOUNTID",
+        "right": "8",
+        "indent": 0
+      },
+      {
+        "left": "Account",
+        "right": "1",
+        "indent": 0
+      },
+      {
+        "left": "account vl prefix",
+        "right": "14",
+        "indent": 0
+      },
+      {
+        "left": "",
+        "right": "93B89AFCAD4C8EAC2B131C1331FEF12AE1522BBE",
+        "indent": 0
+      },
+      {
+        "left": "ACCOUNTID",
+        "right": "8",
+        "indent": 0
+      },
+      {
+        "left": "Destination",
+        "right": "3",
+        "indent": 0
+      },
+      {
+        "left": "account vl prefix",
+        "right": "14",
+        "indent": 0
+      },
+      {
+        "left": "",
+        "right": "0000000000000000000000000000000000000001",
+        "indent": 0
+      },
+      {
+        "left": "ARRAY",
+        "right": "F",
+        "indent": 0
+      },
+      {
+        "left": "Memos",
+        "right": "9",
+        "indent": 0
+      },
+      {
+        "left": "OBJECT",
+        "right": "E",
+        "indent": 2
+      },
+      {
+        "left": "Memo",
+        "right": "A",
+        "indent": 2
+      },
+      {
+        "left": "BLOB",
+        "right": "7",
+        "indent": 4
+      },
+      {
+        "left": "MemoType",
+        "right": "C",
+        "indent": 4
+      },
+      {
+        "left": "1 byte length 4",
+        "right": "04",
+        "indent": 4
+      },
+      {
+        "left": "",
+        "right": "74657874",
+        "indent": 4
+      },
+      {
+        "left": "BLOB",
+        "right": "7",
+        "indent": 4
+      },
+      {
+        "left": "MemoData",
+        "right": "D",
+        "indent": 4
+      },
+      {
+        "left": "1 byte length 5",
+        "right": "05",
+        "indent": 4
+      },
+      {
+        "left": "",
+        "right": "68656C6C6F",
+        "indent": 4
+      },
+      {
+        "left": "OBJECT",
+        "right": "E",
+        "indent": 4
+      },
+      {
+        "left": "ObjectEndMarker",
+        "right": "1",
+        "indent": 4
+      },
+      {
+        "left": "ARRAY",
+        "right": "F",
+        "indent": 2
+      },
+      {
+        "left": "ArrayEndMarker",
+        "right": "1",
+        "indent": 2
+      },
+      {
+        "left": "type uncommon",
+        "right": "0",
+        "indent": 0
+      },
+      {
+        "left": "Paths",
+        "right": "1",
+        "indent": 0
+      },
+      {
+        "left": "PATHSET",
+        "right": "12",
+        "indent": 0
+      },
+      {
+        "left": "step w/ account",
+        "right": "01",
+        "indent": 2
+      },
+      {
+        "left": "account",
+        "right": "0000000000000000000000000000000000000001",
+        "indent": 4
+      },
+      {
+        "left": "step w/ currency issuer",
+        "right": "30",
+        "indent": 2
+      },
+      {
+        "left": "currency",
+        "right": "0000000000000000000000005553440000000000",
+        "indent": 4
+      },
+      {
+        "left": "issuer",
+        "right": "93B89AFCAD4C8EAC2B131C1331FEF12AE1522BBE",
+        "indent": 4
+      },
+      {
+        "left": "pathset continue",
+        "right": "FF",
+        "indent": 2
+      },
+      {
+        "left": "step w/ currency",
+        "right": "10",
+        "indent": 2
+      },
+      {
+        "left": "currency",
+        "right": "0000000000000000000000000000000000000000",
+        "indent": 4
+      },
+      {
+        "left": "pathset end",
+        "right": "00",
+        "indent": 0
+      }
+    ],
+    "status": "Looks like a valid STObject.",
+    "textarea": "1200002200000000240000000161D485543DF729C000000000000000000000000000555344000000000093B89AFCAD4C8EAC2B131C1331FEF12AE1522BBE68400000000000000A6940000000000003E87321EDABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABABAB7440CDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCD811493B89AFCAD4C8EAC2B131C1331FEF12AE1522BBE83140000000000000000000000000000000000000001F9EA7C04746578747D0568656C6C6FE1F1011201000000000000000000000000000000000000000130000000000000000000000000555344000000000093B89AFCAD4C8EAC2B131C1331FEF12AE1522BBEFF10000000000000000000000000000000000000000000"
+  },
+  "accountset_uncommon": {
+    "input": "120003240000000720290000006368400000000000000C770B6578616D706C652E636F6D811493B89AFCAD4C8EAC2B131C1331FEF12AE1522BBE00101005",
+    "rows": [
+      {
+        "left": "UINT16",
+        "right": "1",
+        "indent": 0
+      },
+      {
+        "left": "TransactionType",
+        "right": "2",
+        "indent": 0
+      },
+      {
+        "left": "",
+        "right": "0003",
+        "indent": 0
+      },
+      {
+        "left": "UINT32",
+        "right": "2",
+        "indent": 0
+      },
+      {
+        "left": "Sequence",
+        "right": "4",
+        "indent": 0
+      },
+      {
+        "left": "",
+        "right": "00000007",
+        "indent": 0
+      },
+      {
+        "left": "UINT32",
+        "right": "2",
+        "indent": 0
+      },
+      {
+        "left": "field uncommon",
+        "right": "0",
+        "indent": 0
+      },
+      {
+        "left": "TicketSequence",
+        "right": "29",
+        "indent": 0
+      },
+      {
+        "left": "",
+        "right": "00000063",
+        "indent": 0
+      },
+      {
+        "left": "AMOUNT",
+        "right": "6",
+        "indent": 0
+      },
+      {
+        "left": "Fee",
+        "right": "8",
+        "indent": 0
+      },
+      {
+        "left": "Flags",
+        "right": "4Bit 0 (XAH Bit) 1 (Sign Bit + Positve) 00 (First bits of drops integer)",
+        "indent": 0
+      },
+      {
+        "left": "XAH Drops",
+        "right": "00000000000000CDec 12 (XAH Drops including two bits above)",
+        "indent": 0
+      },
+      {
+        "left": "BLOB",
+        "right": "7",
+        "indent": 0
+      },
+      {
+        "left": "Domain",
+        "right": "7",
+        "indent": 0
+      },
+      {
+        "left": "1 byte length 11",
+        "right": "0B",
+        "indent": 0
+      },
+      {
+        "left": "",
+        "right": "6578616D706C652E636F6D",
+        "indent": 0
+      },
+      {
+        "left": "ACCOUNTID",
+        "right": "8",
+        "indent": 0
+      },
+      {
+        "left": "Account",
+        "right": "1",
+        "indent": 0
+      },
+      {
+        "left": "account vl prefix",
+        "right": "14",
+        "indent": 0
+      },
+      {
+        "left": "",
+        "right": "93B89AFCAD4C8EAC2B131C1331FEF12AE1522BBE",
+        "indent": 0
+      },
+      {
+        "left": "type uncommon",
+        "right": "0",
+        "indent": 0
+      },
+      {
+        "left": "both type and field uncommon",
+        "right": "0",
+        "indent": 0
+      },
+      {
+        "left": "UINT8",
+        "right": "10",
+        "indent": 0
+      },
+      {
+        "left": "TickSize",
+        "right": "10",
+        "indent": 0
+      },
+      {
+        "left": "",
+        "right": "05",
+        "indent": 0
+      }
+    ],
+    "status": "Looks like a valid STObject.",
+    "textarea": "120003240000000720290000006368400000000000000C770B6578616D706C652E636F6D811493B89AFCAD4C8EAC2B131C1331FEF12AE1522BBE00101005"
+  },
+  "ledger_hashes_vector256": {
+    "input": "1100682200000000201B0000000502134011111111111111111111111111111111111111111111111111111111111111112222222222222222222222222222222222222222222222222222222222222222",
+    "rows": [
+      {
+        "left": "UINT16",
+        "right": "1",
+        "indent": 0
+      },
+      {
+        "left": "LedgerEntryType",
+        "right": "1",
+        "indent": 0
+      },
+      {
+        "left": "",
+        "right": "0068",
+        "indent": 0
+      },
+      {
+        "left": "UINT32",
+        "right": "2",
+        "indent": 0
+      },
+      {
+        "left": "Flags",
+        "right": "2",
+        "indent": 0
+      },
+      {
+        "left": "",
+        "right": "00000000",
+        "indent": 0
+      },
+      {
+        "left": "UINT32",
+        "right": "2",
+        "indent": 0
+      },
+      {
+        "left": "field uncommon",
+        "right": "0",
+        "indent": 0
+      },
+      {
+        "left": "LastLedgerSequence",
+        "right": "1B",
+        "indent": 0
+      },
+      {
+        "left": "",
+        "right": "00000005",
+        "indent": 0
+      },
+      {
+        "left": "type uncommon",
+        "right": "0",
+        "indent": 0
+      },
+      {
+        "left": "Hashes",
+        "right": "2",
+        "indent": 0
+      },
+      {
+        "left": "VECTOR256",
+        "right": "13",
+        "indent": 0
+      },
+      {
+        "left": "1 byte length 64",
+        "right": "40",
+        "indent": 0
+      },
+      {
+        "left": "hash 0",
+        "right": "1111111111111111111111111111111111111111111111111111111111111111",
+        "indent": 0
+      },
+      {
+        "left": "hash 1",
+        "right": "2222222222222222222222222222222222222222222222222222222222222222",
+        "indent": 0
+      }
+    ],
+    "status": "Looks like a valid STObject.",
+    "textarea": "1100682200000000201B0000000502134011111111111111111111111111111111111111111111111111111111111111112222222222222222222222222222222222222222222222222222222222222222"
+  },
+  "ripplestate_negative": {
+    "input": "1100722200010000250000000355AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA6294C470DE4DF820000000000000000000000000005553440000000000000000000000000000000000000000000000000166D5038D7EA4C68000000000000000000000000000555344000000000093B89AFCAD4C8EAC2B131C1331FEF12AE1522BBE67800000000000000000000000000000000000000055534400000000000000000000000000000000000000000000000001",
+    "rows": [
+      {
+        "left": "UINT16",
+        "right": "1",
+        "indent": 0
+      },
+      {
+        "left": "LedgerEntryType",
+        "right": "1",
+        "indent": 0
+      },
+      {
+        "left": "",
+        "right": "0072",
+        "indent": 0
+      },
+      {
+        "left": "UINT32",
+        "right": "2",
+        "indent": 0
+      },
+      {
+        "left": "Flags",
+        "right": "2",
+        "indent": 0
+      },
+      {
+        "left": "",
+        "right": "00010000",
+        "indent": 0
+      },
+      {
+        "left": "UINT32",
+        "right": "2",
+        "indent": 0
+      },
+      {
+        "left": "PreviousTxnLgrSeq",
+        "right": "5",
+        "indent": 0
+      },
+      {
+        "left": "",
+        "right": "00000003",
+        "indent": 0
+      },
+      {
+        "left": "UINT256",
+        "right": "5",
+        "indent": 0
+      },
+      {
+        "left": "PreviousTxnID",
+        "right": "5",
+        "indent": 0
+      },
+      {
+        "left": "",
+        "right": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "indent": 0
+      },
+      {
+        "left": "AMOUNT",
+        "right": "6",
+        "indent": 0
+      },
+      {
+        "left": "Balance",
+        "right": "2",
+        "indent": 0
+      },
+      {
+        "left": "Flags + Exponent",
+        "right": "94CBit 1 (Not XRP Bit) 0 (Sign Bit - Negative) 01010011 (Exponent Raw: 83, Adjusted: -14) 00 (First two bits of mantissa)",
+        "indent": 0
+      },
+      {
+        "left": "Mantissa",
+        "right": "470DE4DF82000Dec 1250000000000000 (Mantissa including two bits above)",
+        "indent": 0
+      },
+      {
+        "left": "Currency Code",
+        "right": "0000000000000000000000005553440000000000Asc USD",
+        "indent": 0
+      },
+      {
+        "left": "Issuer",
+        "right": "0000000000000000000000000000000000000001",
+        "indent": 0
+      },
+      {
+        "left": "AMOUNT",
+        "right": "6",
+        "indent": 0
+      },
+      {
+        "left": "LowLimit",
+        "right": "6",
+        "indent": 0
+      },
+      {
+        "left": "Flags + Exponent",
+        "right": "D50Bit 1 (Not XRP Bit) 1 (Sign Bit + Positive) 01010100 (Exponent Raw: 84, Adjusted: -13) 00 (First two bits of mantissa)",
+        "indent": 0
+      },
+      {
+        "left": "Mantissa",
+        "right": "38D7EA4C68000Dec 1000000000000000 (Mantissa including two bits above)",
+        "indent": 0
+      },
+      {
+        "left": "Currency Code",
+        "right": "0000000000000000000000005553440000000000Asc USD",
+        "indent": 0
+      },
+      {
+        "left": "Issuer",
+        "right": "93B89AFCAD4C8EAC2B131C1331FEF12AE1522BBE",
+        "indent": 0
+      },
+      {
+        "left": "AMOUNT",
+        "right": "6",
+        "indent": 0
+      },
+      {
+        "left": "HighLimit",
+        "right": "7",
+        "indent": 0
+      },
+      {
+        "left": "Flags + Exponent",
+        "right": "800Bit 1 (Not XRP Bit) 0 (Sign Bit - Negative) 00000000 (Exponent Raw: 0, Adjusted: -97) 00 (First two bits of mantissa)",
+        "indent": 0
+      },
+      {
+        "left": "Mantissa",
+        "right": "0000000000000Dec 0 (Mantissa including two bits above)",
+        "indent": 0
+      },
+      {
+        "left": "Currency Code",
+        "right": "0000000000000000000000005553440000000000Asc USD",
+        "indent": 0
+      },
+      {
+        "left": "Issuer",
+        "right": "0000000000000000000000000000000000000001",
+        "indent": 0
+      }
+    ],
+    "status": "Looks like a valid STObject.",
+    "textarea": "1100722200010000250000000355AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA6294C470DE4DF820000000000000000000000000005553440000000000000000000000000000000000000000000000000166D5038D7EA4C68000000000000000000000000000555344000000000093B89AFCAD4C8EAC2B131C1331FEF12AE1522BBE67800000000000000000000000000000000000000055534400000000000000000000000000000000000000000000000001"
+  },
+  "meta_uint8": {
+    "input": "201C00000001031000",
+    "rows": [
+      {
+        "left": "UINT32",
+        "right": "2",
+        "indent": 0
+      },
+      {
+        "left": "field uncommon",
+        "right": "0",
+        "indent": 0
+      },
+      {
+        "left": "TransactionIndex",
+        "right": "1C",
+        "indent": 0
+      },
+      {
+        "left": "",
+        "right": "00000001",
+        "indent": 0
+      },
+      {
+        "left": "type uncommon",
+        "right": "0",
+        "indent": 0
+      },
+      {
+        "left": "TransactionResult",
+        "right": "3",
+        "indent": 0
+      },
+      {
+        "left": "UINT8",
+        "right": "10",
+        "indent": 0
+      },
+      {
+        "left": "",
+        "right": "00",
+        "indent": 0
+      }
+    ],
+    "status": "Looks like a valid STObject.",
+    "textarea": "201C00000001031000"
+  },
+  "readme_base64": {
+    "input": "IBwAAAAGYBLVhxrOudBVMFNPTE8AAAAAAAAAAAAAAAAAAAAAHrPqo62GJC4dUdxQLdZWa9OeBqb45REAciUDfoyvVaOPNaYsre30zFQZ0Uk+2BvLN8SROusd+T0PzFWdBooWVhOrz1Aql0q27WiOEJMKSOfCF8QwNeguSPhNViacAxrx5mKWCMMy7izouVNPTE8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHh5yIAIgAANwAAAAAAAAAAOAAAAAAAAAAAYpYI1WMT36HlU09MTwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWaAAAAAAAAAAFNPTE8AAAAAAAAAAAAAAAAAAAAAHrPqo62GJC4dUdxQLdZWa9OeBqZn1o41+pMaAABTT0xPAAAAAAAAAAAAAAAAAAAAAGVXCdg0h354d1919c6gklgvdMY24eHlEQByJQN+hvVVl8ZcZiIbmHMGdY/MIM2kZmo9hszDYPZmSoQPQ++U81hWGCVKCDhJ3WDvhf2mbuT0EaLU2Wgig9ZZ7hHGM0T0a3bmYpWPzSMD6wgQU09MTwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAeHnIgAiAAA3AAAAAAAAADU4AAAAAAAAAABilYiyJbpeCBBTT0xPAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABZoAAAAAAAAAAU09MTwAAAAAAAAAAAAAAAAAAAAAes+qjrYYkLh1R3FAt1lZr054GpmfWA41+pMaAAFNPTE8AAAAAAAAAAAAAAAAAAAAAbB0iiIzyzIhXnXH+C+aJD+Imi/Ph4eURAGElA36G9VWXxlxmIhuYcwZ1j8wgzaRmaj2GzMNg9mZKhA9D75TzWFaMT0VjEvAtUZm8sfuPZXvxlnUojj9Ovyr8+1oSU3iEBOYkAAAAqWJAAAABF6XiFeHnIgCAAAAkAAAAqi0AAAALQYMyN7hmXS9OABNejeZGWJ9iQAAAARel4gl3CHh1bW0uYXBwgRRsHSKIjPLMiFedcf4L5okP4iaL8+Hh8QMQAA==",
+    "rows": [
+      {
+        "left": "UINT32",
+        "right": "2",
+        "indent": 0
+      },
+      {
+        "left": "field uncommon",
+        "right": "0",
+        "indent": 0
+      },
+      {
+        "left": "TransactionIndex",
+        "right": "1c",
+        "indent": 0
+      },
+      {
+        "left": "",
+        "right": "00000006",
+        "indent": 0
+      },
+      {
+        "left": "AMOUNT",
+        "right": "6",
+        "indent": 0
+      },
+      {
+        "left": "field uncommon",
+        "right": "0",
+        "indent": 0
+      },
+      {
+        "left": "DeliveredAmount",
+        "right": "12",
+        "indent": 0
+      },
+      {
+        "left": "Flags + Exponent",
+        "right": "d58Bit 1 (Not XRP Bit) 1 (Sign Bit + Positive) 01010110 (Exponent Raw: 86, Adjusted: -11) 00 (First two bits of mantissa)",
+        "indent": 0
+      },
+      {
+        "left": "Mantissa",
+        "right": "71aceb9d05530Dec 1999800019998000 (Mantissa including two bits above)",
+        "indent": 0
+      },
+      {
+        "left": "Currency Code",
+        "right": "534f4c4f00000000000000000000000000000000Asc",
+        "indent": 0
+      },
+      {
+        "left": "Issuer",
+        "right": "1eb3eaa3ad86242e1d51dc502dd6566bd39e06a6",
+        "indent": 0
+      },
+      {
+        "left": "ARRAY",
+        "right": "f",
+        "indent": 0
+      },
+      {
+        "left": "AffectedNodes",
+        "right": "8",
+        "indent": 0
+      },
+      {
+        "left": "OBJECT",
+        "right": "e",
+        "indent": 2
+      },
+      {
+        "left": "ModifiedNode",
+        "right": "5",
+        "indent": 2
+      },
+      {
+        "left": "UINT16",
+        "right": "1",
+        "indent": 4
+      },
+      {
+        "left": "LedgerEntryType",
+        "right": "1",
+        "indent": 4
+      },
+      {
+        "left": "",
+        "right": "0072",
+        "indent": 4
+      },
+      {
+        "left": "UINT32",
+        "right": "2",
+        "indent": 4
+      },
+      {
+        "left": "PreviousTxnLgrSeq",
+        "right": "5",
+        "indent": 4
+      },
+      {
+        "left": "",
+        "right": "037e8caf",
+        "indent": 4
+      },
+      {
+        "left": "UINT256",
+        "right": "5",
+        "indent": 4
+      },
+      {
+        "left": "PreviousTxnID",
+        "right": "5",
+        "indent": 4
+      },
+      {
+        "left": "",
+        "right": "a38f35a62cadedf4cc5419d1493ed81bcb37c4913aeb1df93d0fcc559d068a16",
+        "indent": 4
+      },
+      {
+        "left": "UINT256",
+        "right": "5",
+        "indent": 4
+      },
+      {
+        "left": "LedgerIndex",
+        "right": "6",
+        "indent": 4
+      },
+      {
+        "left": "",
+        "right": "13abcf502a974ab6ed688e10930a48e7c217c43035e82e48f84d56269c031af1",
+        "indent": 4
+      },
+      {
+        "left": "OBJECT",
+        "right": "e",
+        "indent": 4
+      },
+      {
+        "left": "PreviousFields",
+        "right": "6",
+        "indent": 4
+      },
+      {
+        "left": "AMOUNT",
+        "right": "6",
+        "indent": 6
+      },
+      {
+        "left": "Balance",
+        "right": "2",
+        "indent": 6
+      },
+      {
+        "left": "Flags + Exponent",
+        "right": "960Bit 1 (Not XRP Bit) 0 (Sign Bit - Negative) 01011000 (Exponent Raw: 88, Adjusted: -9) 00 (First two bits of mantissa)",
+        "indent": 6
+      },
+      {
+        "left": "Mantissa",
+        "right": "8c332ee2ce8b9Dec 2466423325386937 (Mantissa including two bits above)",
+        "indent": 6
+      },
+      {
+        "left": "Currency Code",
+        "right": "534f4c4f00000000000000000000000000000000Asc",
+        "indent": 6
+      },
+      {
+        "left": "Issuer",
+        "right": "0000000000000000000000000000000000000001",
+        "indent": 6
+      },
+      {
+        "left": "OBJECT",
+        "right": "e",
+        "indent": 6
+      },
+      {
+        "left": "ObjectEndMarker",
+        "right": "1",
+        "indent": 6
+      },
+      {
+        "left": "OBJECT",
+        "right": "e",
+        "indent": 4
+      },
+      {
+        "left": "FinalFields",
+        "right": "7",
+        "indent": 4
+      },
+      {
+        "left": "UINT32",
+        "right": "2",
+        "indent": 6
+      },
+      {
+        "left": "Flags",
+        "right": "2",
+        "indent": 6
+      },
+      {
+        "left": "",
+        "right": "00220000",
+        "indent": 6
+      },
+      {
+        "left": "UINT64",
+        "right": "3",
+        "indent": 6
+      },
+      {
+        "left": "LowNode",
+        "right": "7",
+        "indent": 6
+      },
+      {
+        "left": "",
+        "right": "0000000000000000",
+        "indent": 6
+      },
+      {
+        "left": "UINT64",
+        "right": "3",
+        "indent": 6
+      },
+      {
+        "left": "HighNode",
+        "right": "8",
+        "indent": 6
+      },
+      {
+        "left": "",
+        "right": "0000000000000000",
+        "indent": 6
+      },
+      {
+        "left": "AMOUNT",
+        "right": "6",
+        "indent": 6
+      },
+      {
+        "left": "Balance",
+        "right": "2",
+        "indent": 6
+      },
+      {
+        "left": "Flags + Exponent",
+        "right": "960Bit 1 (Not XRP Bit) 0 (Sign Bit - Negative) 01011000 (Exponent Raw: 88, Adjusted: -9) 00 (First two bits of mantissa)",
+        "indent": 6
+      },
+      {
+        "left": "Mantissa",
+        "right": "8d56313dfa1e5Dec 2486421325586917 (Mantissa including two bits above)",
+        "indent": 6
+      },
+      {
+        "left": "Currency Code",
+        "right": "534f4c4f00000000000000000000000000000000Asc",
+        "indent": 6
+      },
+      {
+        "left": "Issuer",
+        "right": "0000000000000000000000000000000000000001",
+        "indent": 6
+      },
+      {
+        "left": "AMOUNT",
+        "right": "6",
+        "indent": 6
+      },
+      {
+        "left": "LowLimit",
+        "right": "6",
+        "indent": 6
+      },
+      {
+        "left": "Flags + Exponent",
+        "right": "800Bit 1 (Not XRP Bit) 0 (Sign Bit - Negative) 00000000 (Exponent Raw: 0, Adjusted: -97) 00 (First two bits of mantissa)",
+        "indent": 6
+      },
+      {
+        "left": "Mantissa",
+        "right": "0000000000000Dec 0 (Mantissa including two bits above)",
+        "indent": 6
+      },
+      {
+        "left": "Currency Code",
+        "right": "534f4c4f00000000000000000000000000000000Asc",
+        "indent": 6
+      },
+      {
+        "left": "Issuer",
+        "right": "1eb3eaa3ad86242e1d51dc502dd6566bd39e06a6",
+        "indent": 6
+      },
+      {
+        "left": "AMOUNT",
+        "right": "6",
+        "indent": 6
+      },
+      {
+        "left": "HighLimit",
+        "right": "7",
+        "indent": 6
+      },
+      {
+        "left": "Flags + Exponent",
+        "right": "d68Bit 1 (Not XRP Bit) 1 (Sign Bit + Positive) 01011010 (Exponent Raw: 90, Adjusted: -7) 00 (First two bits of mantissa)",
+        "indent": 6
+      },
+      {
+        "left": "Mantissa",
+        "right": "e35fa931a0000Dec 4000000000000000 (Mantissa including two bits above)",
+        "indent": 6
+      },
+      {
+        "left": "Currency Code",
+        "right": "534f4c4f00000000000000000000000000000000Asc",
+        "indent": 6
+      },
+      {
+        "left": "Issuer",
+        "right": "655709d834877e78775f75f5cea092582f74c636",
+        "indent": 6
+      },
+      {
+        "left": "OBJECT",
+        "right": "e",
+        "indent": 6
+      },
+      {
+        "left": "ObjectEndMarker",
+        "right": "1",
+        "indent": 6
+      },
+      {
+        "left": "OBJECT",
+        "right": "e",
+        "indent": 4
+      },
+      {
+        "left": "ObjectEndMarker",
+        "right": "1",
+        "indent": 4
+      },
+      {
+        "left": "OBJECT",
+        "right": "e",
+        "indent": 2
+      },
+      {
+        "left": "ModifiedNode",
+        "right": "5",
+        "indent": 2
+      },
+      {
+        "left": "UINT16",
+        "right": "1",
+        "indent": 4
+      },
+      {
+        "left": "LedgerEntryType",
+        "right": "1",
+        "indent": 4
+      },
+      {
+        "left": "",
+        "right": "0072",
+        "indent": 4
+      },
+      {
+        "left": "UINT32",
+        "right": "2",
+        "indent": 4
+      },
+      {
+        "left": "PreviousTxnLgrSeq",
+        "right": "5",
+        "indent": 4
+      },
+      {
+        "left": "",
+        "right": "037e86f5",
+        "indent": 4
+      },
+      {
+        "left": "UINT256",
+        "right": "5",
+        "indent": 4
+      },
+      {
+        "left": "PreviousTxnID",
+        "right": "5",
+        "indent": 4
+      },
+      {
+        "left": "",
+        "right": "97c65c66221b987306758fcc20cda4666a3d86ccc360f6664a840f43ef94f358",
+        "indent": 4
+      },
+      {
+        "left": "UINT256",
+        "right": "5",
+        "indent": 4
+      },
+      {
+        "left": "LedgerIndex",
+        "right": "6",
+        "indent": 4
+      },
+      {
+        "left": "",
+        "right": "18254a083849dd60ef85fda66ee4f411a2d4d9682283d659ee11c63344f46b76",
+        "indent": 4
+      },
+      {
+        "left": "OBJECT",
+        "right": "e",
+        "indent": 4
+      },
+      {
+        "left": "PreviousFields",
+        "right": "6",
+        "indent": 4
+      },
+      {
+        "left": "AMOUNT",
+        "right": "6",
+        "indent": 6
+      },
+      {
+        "left": "Balance",
+        "right": "2",
+        "indent": 6
+      },
+      {
+        "left": "Flags + Exponent",
+        "right": "958Bit 1 (Not XRP Bit) 0 (Sign Bit - Negative) 01010110 (Exponent Raw: 86, Adjusted: -11) 00 (First two bits of mantissa)",
+        "indent": 6
+      },
+      {
+        "left": "Mantissa",
+        "right": "fcd2303eb0810Dec 4447674923943952 (Mantissa including two bits above)",
+        "indent": 6
+      },
+      {
+        "left": "Currency Code",
+        "right": "534f4c4f00000000000000000000000000000000Asc",
+        "indent": 6
+      },
+      {
+        "left": "Issuer",
+        "right": "0000000000000000000000000000000000000001",
+        "indent": 6
+      },
+      {
+        "left": "OBJECT",
+        "right": "e",
+        "indent": 6
+      },
+      {
+        "left": "ObjectEndMarker",
+        "right": "1",
+        "indent": 6
+      },
+      {
+        "left": "OBJECT",
+        "right": "e",
+        "indent": 4
+      },
+      {
+        "left": "FinalFields",
+        "right": "7",
+        "indent": 4
+      },
+      {
+        "left": "UINT32",
+        "right": "2",
+        "indent": 6
+      },
+      {
+        "left": "Flags",
+        "right": "2",
+        "indent": 6
+      },
+      {
+        "left": "",
+        "right": "00220000",
+        "indent": 6
+      },
+      {
+        "left": "UINT64",
+        "right": "3",
+        "indent": 6
+      },
+      {
+        "left": "LowNode",
+        "right": "7",
+        "indent": 6
+      },
+      {
+        "left": "",
+        "right": "0000000000000035",
+        "indent": 6
+      },
+      {
+        "left": "UINT64",
+        "right": "3",
+        "indent": 6
+      },
+      {
+        "left": "HighNode",
+        "right": "8",
+        "indent": 6
+      },
+      {
+        "left": "",
+        "right": "0000000000000000",
+        "indent": 6
+      },
+      {
+        "left": "AMOUNT",
+        "right": "6",
+        "indent": 6
+      },
+      {
+        "left": "Balance",
+        "right": "2",
+        "indent": 6
+      },
+      {
+        "left": "Flags + Exponent",
+        "right": "958Bit 1 (Not XRP Bit) 0 (Sign Bit - Negative) 01010110 (Exponent Raw: 86, Adjusted: -11) 00 (First two bits of mantissa)",
+        "indent": 6
+      },
+      {
+        "left": "Mantissa",
+        "right": "8b225ba5e0810Dec 2447674923943952 (Mantissa including two bits above)",
+        "indent": 6
+      },
+      {
+        "left": "Currency Code",
+        "right": "534f4c4f00000000000000000000000000000000Asc",
+        "indent": 6
+      },
+      {
+        "left": "Issuer",
+        "right": "0000000000000000000000000000000000000001",
+        "indent": 6
+      },
+      {
+        "left": "AMOUNT",
+        "right": "6",
+        "indent": 6
+      },
+      {
+        "left": "LowLimit",
+        "right": "6",
+        "indent": 6
+      },
+      {
+        "left": "Flags + Exponent",
+        "right": "800Bit 1 (Not XRP Bit) 0 (Sign Bit - Negative) 00000000 (Exponent Raw: 0, Adjusted: -97) 00 (First two bits of mantissa)",
+        "indent": 6
+      },
+      {
+        "left": "Mantissa",
+        "right": "0000000000000Dec 0 (Mantissa including two bits above)",
+        "indent": 6
+      },
+      {
+        "left": "Currency Code",
+        "right": "534f4c4f00000000000000000000000000000000Asc",
+        "indent": 6
+      },
+      {
+        "left": "Issuer",
+        "right": "1eb3eaa3ad86242e1d51dc502dd6566bd39e06a6",
+        "indent": 6
+      },
+      {
+        "left": "AMOUNT",
+        "right": "6",
+        "indent": 6
+      },
+      {
+        "left": "HighLimit",
+        "right": "7",
+        "indent": 6
+      },
+      {
+        "left": "Flags + Exponent",
+        "right": "d60Bit 1 (Not XRP Bit) 1 (Sign Bit + Positive) 01011000 (Exponent Raw: 88, Adjusted: -9) 00 (First two bits of mantissa)",
+        "indent": 6
+      },
+      {
+        "left": "Mantissa",
+        "right": "38d7ea4c68000Dec 1000000000000000 (Mantissa including two bits above)",
+        "indent": 6
+      },
+      {
+        "left": "Currency Code",
+        "right": "534f4c4f00000000000000000000000000000000Asc",
+        "indent": 6
+      },
+      {
+        "left": "Issuer",
+        "right": "6c1d22888cf2cc88579d71fe0be6890fe2268bf3",
+        "indent": 6
+      },
+      {
+        "left": "OBJECT",
+        "right": "e",
+        "indent": 6
+      },
+      {
+        "left": "ObjectEndMarker",
+        "right": "1",
+        "indent": 6
+      },
+      {
+        "left": "OBJECT",
+        "right": "e",
+        "indent": 4
+      },
+      {
+        "left": "ObjectEndMarker",
+        "right": "1",
+        "indent": 4
+      },
+      {
+        "left": "OBJECT",
+        "right": "e",
+        "indent": 2
+      },
+      {
+        "left": "ModifiedNode",
+        "right": "5",
+        "indent": 2
+      },
+      {
+        "left": "UINT16",
+        "right": "1",
+        "indent": 4
+      },
+      {
+        "left": "LedgerEntryType",
+        "right": "1",
+        "indent": 4
+      },
+      {
+        "left": "",
+        "right": "0061",
+        "indent": 4
+      },
+      {
+        "left": "UINT32",
+        "right": "2",
+        "indent": 4
+      },
+      {
+        "left": "PreviousTxnLgrSeq",
+        "right": "5",
+        "indent": 4
+      },
+      {
+        "left": "",
+        "right": "037e86f5",
+        "indent": 4
+      },
+      {
+        "left": "UINT256",
+        "right": "5",
+        "indent": 4
+      },
+      {
+        "left": "PreviousTxnID",
+        "right": "5",
+        "indent": 4
+      },
+      {
+        "left": "",
+        "right": "97c65c66221b987306758fcc20cda4666a3d86ccc360f6664a840f43ef94f358",
+        "indent": 4
+      },
+      {
+        "left": "UINT256",
+        "right": "5",
+        "indent": 4
+      },
+      {
+        "left": "LedgerIndex",
+        "right": "6",
+        "indent": 4
+      },
+      {
+        "left": "",
+        "right": "8c4f456312f02d5199bcb1fb8f657bf19675288e3f4ebf2afcfb5a1253788404",
+        "indent": 4
+      },
+      {
+        "left": "OBJECT",
+        "right": "e",
+        "indent": 4
+      },
+      {
+        "left": "PreviousFields",
+        "right": "6",
+        "indent": 4
+      },
+      {
+        "left": "UINT32",
+        "right": "2",
+        "indent": 6
+      },
+      {
+        "left": "Sequence",
+        "right": "4",
+        "indent": 6
+      },
+      {
+        "left": "",
+        "right": "000000a9",
+        "indent": 6
+      },
+      {
+        "left": "AMOUNT",
+        "right": "6",
+        "indent": 6
+      },
+      {
+        "left": "Balance",
+        "right": "2",
+        "indent": 6
+      },
+      {
+        "left": "Flags",
+        "right": "4Bit 0 (XAH Bit) 1 (Sign Bit + Positve) 00 (First bits of drops integer)",
+        "indent": 6
+      },
+      {
+        "left": "XAH Drops",
+        "right": "000000117a5e215Dec 4691714581 (XAH Drops including two bits above)",
+        "indent": 6
+      },
+      {
+        "left": "OBJECT",
+        "right": "e",
+        "indent": 6
+      },
+      {
+        "left": "ObjectEndMarker",
+        "right": "1",
+        "indent": 6
+      },
+      {
+        "left": "OBJECT",
+        "right": "e",
+        "indent": 4
+      },
+      {
+        "left": "FinalFields",
+        "right": "7",
+        "indent": 4
+      },
+      {
+        "left": "UINT32",
+        "right": "2",
+        "indent": 6
+      },
+      {
+        "left": "Flags",
+        "right": "2",
+        "indent": 6
+      },
+      {
+        "left": "",
+        "right": "00800000",
+        "indent": 6
+      },
+      {
+        "left": "UINT32",
+        "right": "2",
+        "indent": 6
+      },
+      {
+        "left": "Sequence",
+        "right": "4",
+        "indent": 6
+      },
+      {
+        "left": "",
+        "right": "000000aa",
+        "indent": 6
+      },
+      {
+        "left": "UINT32",
+        "right": "2",
+        "indent": 6
+      },
+      {
+        "left": "OwnerCount",
+        "right": "d",
+        "indent": 6
+      },
+      {
+        "left": "",
+        "right": "0000000b",
+        "indent": 6
+      },
+      {
+        "left": "UINT128",
+        "right": "4",
+        "indent": 6
+      },
+      {
+        "left": "EmailHash",
+        "right": "1",
+        "indent": 6
+      },
+      {
+        "left": "",
+        "right": "833237b8665d2f4e00135e8de646589f",
+        "indent": 6
+      },
+      {
+        "left": "AMOUNT",
+        "right": "6",
+        "indent": 6
+      },
+      {
+        "left": "Balance",
+        "right": "2",
+        "indent": 6
+      },
+      {
+        "left": "Flags",
+        "right": "4Bit 0 (XAH Bit) 1 (Sign Bit + Positve) 00 (First bits of drops integer)",
+        "indent": 6
+      },
+      {
+        "left": "XAH Drops",
+        "right": "000000117a5e209Dec 4691714569 (XAH Drops including two bits above)",
+        "indent": 6
+      },
+      {
+        "left": "BLOB",
+        "right": "7",
+        "indent": 6
+      },
+      {
+        "left": "Domain",
+        "right": "7",
+        "indent": 6
+      },
+      {
+        "left": "1 byte length 8",
+        "right": "08",
+        "indent": 6
+      },
+      {
+        "left": "",
+        "right": "78756d6d2e617070",
+        "indent": 6
+      },
+      {
+        "left": "ACCOUNTID",
+        "right": "8",
+        "indent": 6
+      },
+      {
+        "left": "Account",
+        "right": "1",
+        "indent": 6
+      },
+      {
+        "left": "account vl prefix",
+        "right": "14",
+        "indent": 6
+      },
+      {
+        "left": "",
+        "right": "6c1d22888cf2cc88579d71fe0be6890fe2268bf3",
+        "indent": 6
+      },
+      {
+        "left": "OBJECT",
+        "right": "e",
+        "indent": 6
+      },
+      {
+        "left": "ObjectEndMarker",
+        "right": "1",
+        "indent": 6
+      },
+      {
+        "left": "OBJECT",
+        "right": "e",
+        "indent": 4
+      },
+      {
+        "left": "ObjectEndMarker",
+        "right": "1",
+        "indent": 4
+      },
+      {
+        "left": "ARRAY",
+        "right": "f",
+        "indent": 2
+      },
+      {
+        "left": "ArrayEndMarker",
+        "right": "1",
+        "indent": 2
+      },
+      {
+        "left": "type uncommon",
+        "right": "0",
+        "indent": 0
+      },
+      {
+        "left": "TransactionResult",
+        "right": "3",
+        "indent": 0
+      },
+      {
+        "left": "UINT8",
+        "right": "10",
+        "indent": 0
+      },
+      {
+        "left": "",
+        "right": "00",
+        "indent": 0
+      }
+    ],
+    "status": "Looks like a valid STObject.",
+    "textarea": "201c000000066012d5871aceb9d05530534f4c4f000000000000000000000000000000001eb3eaa3ad86242e1d51dc502dd6566bd39e06a6f8e511007225037e8caf55a38f35a62cadedf4cc5419d1493ed81bcb37c4913aeb1df93d0fcc559d068a165613abcf502a974ab6ed688e10930a48e7c217c43035e82e48f84d56269c031af1e6629608c332ee2ce8b9534f4c4f000000000000000000000000000000000000000000000000000000000000000000000001e1e72200220000370000000000000000380000000000000000629608d56313dfa1e5534f4c4f000000000000000000000000000000000000000000000000000000000000000000000001668000000000000000534f4c4f000000000000000000000000000000001eb3eaa3ad86242e1d51dc502dd6566bd39e06a667d68e35fa931a0000534f4c4f00000000000000000000000000000000655709d834877e78775f75f5cea092582f74c636e1e1e511007225037e86f55597c65c66221b987306758fcc20cda4666a3d86ccc360f6664a840f43ef94f3585618254a083849dd60ef85fda66ee4f411a2d4d9682283d659ee11c63344f46b76e662958fcd2303eb0810534f4c4f000000000000000000000000000000000000000000000000000000000000000000000001e1e72200220000370000000000000035380000000000000000629588b225ba5e0810534f4c4f000000000000000000000000000000000000000000000000000000000000000000000001668000000000000000534f4c4f000000000000000000000000000000001eb3eaa3ad86242e1d51dc502dd6566bd39e06a667d6038d7ea4c68000534f4c4f000000000000000000000000000000006c1d22888cf2cc88579d71fe0be6890fe2268bf3e1e1e511006125037e86f55597c65c66221b987306758fcc20cda4666a3d86ccc360f6664a840f43ef94f358568c4f456312f02d5199bcb1fb8f657bf19675288e3f4ebf2afcfb5a1253788404e624000000a9624000000117a5e215e1e7220080000024000000aa2d0000000b41833237b8665d2f4e00135e8de646589f624000000117a5e209770878756d6d2e61707081146c1d22888cf2cc88579d71fe0be6890fe2268bf3e1e1f1031000"
+  },
+  "json_input": {
+    "input": "{\"tx_blob\":\"1200002200000000\",\"note\":\"hello world\",\"nested\":{\"n\":1,\"h\":\"DEADBEEF\"}}",
+    "rows": [],
+    "text": "{ \"tx_blob\": \"1200002200000000\", \"note\": \"hello world\", \"nested\": { \"n\": 1, \"h\": \"DEADBEEF\" }}",
+    "status": "You entered json... Click a field!",
+    "textarea": "{\"tx_blob\":\"1200002200000000\",\"note\":\"hello world\",\"nested\":{\"n\":1,\"h\":\"DEADBEEF\"}}"
+  },
+  "truncated": {
+    "input": "201C000000066012D5871ACEB9D05530534F4C4F00000000000000000000",
+    "rows": [
+      {
+        "left": "UINT32",
+        "right": "2",
+        "indent": 0
+      },
+      {
+        "left": "field uncommon",
+        "right": "0",
+        "indent": 0
+      },
+      {
+        "left": "TransactionIndex",
+        "right": "1C",
+        "indent": 0
+      },
+      {
+        "left": "",
+        "right": "00000006",
+        "indent": 0
+      },
+      {
+        "left": "AMOUNT",
+        "right": "6",
+        "indent": 0
+      },
+      {
+        "left": "field uncommon",
+        "right": "0",
+        "indent": 0
+      },
+      {
+        "left": "DeliveredAmount",
+        "right": "12",
+        "indent": 0
+      },
+      {
+        "left": "Flags + Exponent",
+        "right": "D58Bit 1 (Not XRP Bit) 1 (Sign Bit + Positive) 01010110 (Exponent Raw: 86, Adjusted: -11) 00 (First two bits of mantissa)",
+        "indent": 0
+      },
+      {
+        "left": "Mantissa",
+        "right": "71ACEB9D05530Dec 1999800019998000 (Mantissa including two bits above)",
+        "indent": 0
+      }
+    ],
+    "status": "Parser did not complete cleanly, if this is an STObject it is incomplete.",
+    "textarea": "201C000000066012D5871ACEB9D05530534F4C4F00000000000000000000"
+  },
+  "account_id": {
+    "input": "93B89AFCAD4C8EAC2B131C1331FEF12AE1522BBE",
+    "rows": [
+      {
+        "left": "UNKNOWN",
+        "right": "9",
+        "indent": 0
+      },
+      {
+        "left": "[[UNKNOWN_FIELD]]",
+        "right": "3",
+        "indent": 0
+      },
+      {
+        "left": "UNKNOWN",
+        "right": "B",
+        "indent": 0
+      },
+      {
+        "left": "[[UNKNOWN_FIELD]]",
+        "right": "8",
+        "indent": 0
+      }
+    ],
+    "status": "Parser did not complete cleanly and unknown fields were detected ...by the way this might be an AccountID.",
+    "textarea": "93B89AFCAD4C8EAC2B131C1331FEF12AE1522BBE"
+  },
+  "garbage": {
+    "input": "zzz!!",
+    "rows": [],
+    "text": "",
+    "status": "Input was not base64 or hex, I don't know what to do with it...",
+    "textarea": "zzz!!"
+  },
+  "unknown_field": {
+    "input": "1F0A0001",
+    "rows": [
+      {
+        "left": "UINT16",
+        "right": "1",
+        "indent": 0
+      },
+      {
+        "left": "[[UNKNOWN_FIELD]]",
+        "right": "F",
+        "indent": 0
+      },
+      {
+        "left": "",
+        "right": "0A00",
+        "indent": 0
+      },
+      {
+        "left": "type uncommon",
+        "right": "0",
+        "indent": 0
+      }
+    ],
+    "status": "Unknown fields detected either not an STObject or wrong definitions.json. Try adding: ?url-to-your-definitions.json to the current URL",
+    "textarea": "1F0A0001"
+  }
+}
