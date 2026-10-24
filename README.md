@@ -1,6 +1,8 @@
 # xrpl-binary-visualizer
 Visualize the decoding process for an STObject blob, such as a transaction, ledger object or manifest.
 
+![Decoding a hex blob](docs/screenshot-hex.png)
+
 ## Use in your browser
 To use go to [binary-visualizer.xahau.tools](https://binary-visualizer.xahau.tools/)
 
