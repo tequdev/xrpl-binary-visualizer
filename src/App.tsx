@@ -1,9 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import { loadDefinitions, toParseDefs } from "./definitions.ts";
+import { type Definitions, loadDefinitions } from "./definitions.ts";
 import { BASE64_RE, classifyInput, HEX_RE } from "./input.ts";
 import { type ParseResult, parse, type Row, type Status } from "./parser.ts";
-
-type ParseDefs = Parameters<typeof parse>[1];
 
 type View = { kind: "none" } | { kind: "json"; value: unknown } | { kind: "rows"; rows: Row[] };
 
@@ -104,7 +102,7 @@ const STATUS_CLASS: Partial<Record<Status["kind"], string>> = {
 };
 
 export function App() {
-  const [defs, setDefs] = useState<ParseDefs | null>(null);
+  const [defs, setDefs] = useState<Definitions | null>(null);
   const [text, setText] = useState("");
   const [stack, setStack] = useState<string[]>([]);
   const [status, setStatus] = useState<Status>({ kind: "clear", message: "" });
@@ -119,7 +117,7 @@ export function App() {
     loadDefinitions(url)
       .then((d) => {
         if (cancelled) return;
-        setDefs(toParseDefs(d));
+        setDefs(d);
         setDefsState("ready");
       })
       .catch((e) => {

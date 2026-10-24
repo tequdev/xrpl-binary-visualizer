@@ -8,7 +8,7 @@ Date: 6 October 2020
 // fields through a HexReader. Running out of input anywhere throws EndOfInput, which is caught
 // once in parse(): rows pushed before the throw are kept, nothing partial is pushed.
 
-import type { TypeLookup } from "./definitions.ts";
+import type { Definitions } from "./definitions.ts";
 
 export type BreakdownPart = { text: string; note?: string };
 
@@ -23,13 +23,6 @@ export type Row = {
 export type StatusKind = "clear" | "good" | "bad" | "ugly" | "info";
 export type Status = { kind: StatusKind; message: string };
 export type ParseResult = { rows: Row[]; status: Status };
-
-export type ParseDefs = {
-  types: Record<string, number>;
-  lookup: TypeLookup;
-  /** Native asset code shown in Amount/Currency rows (e.g. XRP, XAH). */
-  native: string;
-};
 
 /** Serialized type codes. */
 const TYPE = {
@@ -91,9 +84,6 @@ const VL_TWO_BYTE_OFFSET = 193;
 const VL_THREE_BYTE_MIN = 241;
 const VL_THREE_BYTE_OFFSET = 12481;
 
-/** Vector256 chunk size in nibbles. */
-const HASH256_NIBBLES = bytes(32);
-
 /** PathSet step flags. */
 const PATH_ACCOUNT = 0x01;
 const PATH_CURRENCY = 0x10;
@@ -102,8 +92,6 @@ const PATH_END = 0x00;
 const PATH_CONTINUE = 0xff;
 
 class EndOfInput extends Error {}
-
-type Chunk = { hex: string; value: number };
 
 /** Sequential reader over a whitespace-free hex string. Preserves the original character case. */
 class HexReader {
@@ -122,16 +110,16 @@ class HexReader {
     return out;
   }
 
-  private chunk(n: number): Chunk {
+  private chunk(n: number) {
     const hex = this.take(n);
     return { hex, value: Number.parseInt(hex, 16) };
   }
 
-  nibble(): Chunk {
+  nibble() {
     return this.chunk(1);
   }
 
-  byte(): Chunk {
+  byte() {
     return this.chunk(2);
   }
 
@@ -144,7 +132,8 @@ class HexReader {
 
 type FieldHeader = { type: number; field: number; compact: boolean };
 
-export function parse(hex: string, defs: ParseDefs): ParseResult {
+export function parse(hex: string, defs: Definitions): ParseResult {
+  const native = defs.native_currency_code ?? "XRP";
   const input = hex.replace(/\s/g, "");
   const r = new HexReader(input);
   const rows: Row[] = [];
@@ -154,19 +143,11 @@ export function parse(hex: string, defs: ParseDefs): ParseResult {
   const depth = { object: 0, array: 0 };
 
   const push = (kind: Row["kind"], label: string, h: string, breakdown?: BreakdownPart[]) => {
-    const row: Row = { kind, label, hex: h, indent };
-    if (breakdown) row.breakdown = breakdown;
-    rows.push(row);
+    rows.push({ kind, label, hex: h, indent, ...(breakdown && { breakdown }) });
   };
 
   const pushType = (t: number, h: string) => {
-    let name = "Unknown";
-    for (const k in defs.types) {
-      if (defs.types[k] === t) {
-        name = k;
-        break;
-      }
-    }
+    let name = Object.keys(defs.TYPES).find((k) => defs.TYPES[k] === t) ?? "Unknown";
     if (name === "Unknown") unknownDetected = true;
     name = name.replaceAll("Hash", "UInt").toUpperCase();
     if (name.startsWith("ST")) name = name.substring(2);
@@ -174,10 +155,10 @@ export function parse(hex: string, defs: ParseDefs): ParseResult {
   };
 
   const pushField = (t: number, fc: number, h: string) => {
-    let name = "[[UNKNOWN_FIELD]]";
-    if (t in defs.lookup && fc in defs.lookup[t]) name = defs.lookup[t][fc].name;
-    else unknownDetected = true;
-    push("field", name, h);
+    // last match wins: def.json has duplicate (type, nth) keys and the legacy lookup kept the last
+    const match = defs.FIELDS.filter(([, i]) => defs.TYPES[i.type] === t && i.nth === fc).at(-1);
+    if (!match) unknownDetected = true;
+    push("field", match?.[0] ?? "[[UNKNOWN_FIELD]]", h);
   };
 
   /** Reads n nibbles into a payload row; returns the hex. */
@@ -188,9 +169,7 @@ export function parse(hex: string, defs: ParseDefs): ParseResult {
   };
 
   const asciiCode = (h: string) =>
-    String.fromCharCode(parseInt(h.slice(24, 26), 16)) +
-    String.fromCharCode(parseInt(h.slice(26, 28), 16)) +
-    String.fromCharCode(parseInt(h.slice(28, 30), 16));
+    String.fromCharCode(...[24, 26, 28].map((i) => parseInt(h.slice(i, i + 2), 16)));
 
   /** Type + field code, in every encoding. Emits the explain/type/field rows. */
   function readFieldHeader(): FieldHeader {
@@ -255,19 +234,15 @@ export function parse(hex: string, defs: ParseDefs): ParseResult {
 
   function readVector256() {
     let remaining = bytes(readVL());
-    let acc = "";
-    let n = 0;
-    while (remaining > 0) {
-      const c = r.take(1);
-      // chunks are cut on the remaining count, so an inconsistent length yields a short first chunk
-      if (remaining % HASH256_NIBBLES === 0 && acc !== "") {
-        push("payload", `hash ${n++}`, acc);
-        acc = "";
-      }
-      remaining--;
-      acc += c;
+    for (let n = 0; remaining > 0; n++) {
+      // an inconsistent length yields a short first chunk, then full hashes
+      const size = remaining % FIXED_NIBBLES[TYPE.Hash256] || FIXED_NIBBLES[TYPE.Hash256];
+      const h = r.take(size);
+      remaining -= size;
+      // legacy quirk: a complete hash is only shown once a nibble follows it (or it is the last one)
+      if (remaining > 0) r.peek();
+      push("payload", `hash ${n}`, h);
     }
-    if (acc !== "") push("payload", `hash ${n}`, acc);
   }
 
   function readAccount() {
@@ -283,16 +258,16 @@ export function parse(hex: string, defs: ParseDefs): ParseResult {
       const carry = first.value & 0x3;
       push("special", "Flags", first.hex, [
         { text: "Bit" },
-        { text: "0", note: `${defs.native} Bit` },
+        { text: "0", note: `${native} Bit` },
         { text: "1", note: "Sign Bit + Positve" },
         { text: carry.toString(2).padStart(2, "0"), note: "First bits of drops integer" },
       ]);
       const drops = r.take(NATIVE_AMOUNT_NIBBLES - 1);
-      push("special", `${defs.native} Drops`, drops, [
+      push("special", `${native} Drops`, drops, [
         { text: "Dec" },
         {
           text: String(carry + parseInt(drops, 16)),
-          note: `${defs.native} Drops including two bits above`,
+          note: `${native} Drops including two bits above`,
         },
       ]);
       return;
@@ -300,13 +275,13 @@ export function parse(hex: string, defs: ParseDefs): ParseResult {
 
     const head = first.hex + r.take(IOU_FLAGS_EXPONENT_NIBBLES - 1);
     const firstthree = parseInt(head, 16);
-    const bits = firstthree >> 10;
-    const exponentNum = ((firstthree >> 2) & 0xff) >>> 0;
+    const positive = (firstthree >> 10) & 1;
+    const exponentNum = (firstthree >> 2) & 0xff;
     const exponent = exponentNum.toString(2).padStart(8, "0");
     push("special", "Flags + Exponent", head, [
       { text: "Bit" },
-      { text: "1", note: `Not ${defs.native} Bit` },
-      { text: String(bits & 1), note: bits & 1 ? "Sign Bit + Positive" : "Sign Bit - Negative" },
+      { text: "1", note: `Not ${native} Bit` },
+      { text: String(positive), note: positive ? "Sign Bit + Positive" : "Sign Bit - Negative" },
       {
         text: exponent,
         note: `Exponent Raw: ${exponentNum}, Adjusted: ${exponentNum - EXPONENT_BIAS}`,
@@ -348,7 +323,7 @@ export function parse(hex: string, defs: ParseDefs): ParseResult {
 
   function readCurrency() {
     const h = r.take(CURRENCY_NIBBLES);
-    const text = h === ZERO_CURRENCY ? defs.native : asciiCode(h);
+    const text = h === ZERO_CURRENCY ? native : asciiCode(h);
     push("special", "currency", h, [{ text }]);
   }
 
@@ -501,7 +476,7 @@ export function parse(hex: string, defs: ParseDefs): ParseResult {
         indentInfo +
         (unknownDetected ? " and unknown fields were detected" : "") +
         " ...\nby the way this " +
-        (up[0] === "E" && up[1] === "D" && len === 66
+        (up.startsWith("ED") && len === 66
           ? "is definitely a public key not an STObject"
           : len === 66
             ? "might be a public key."
