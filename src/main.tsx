@@ -1,5 +1,6 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
+import "@tequdev/xahau-design-system";
 import { App } from "./App.tsx";
 import "./style.css";
 
