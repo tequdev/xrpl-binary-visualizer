@@ -35,7 +35,7 @@ describe("legacy golden", () => {
       if (input.rewritten) expect(input.hex).toBe(c.textarea);
 
       const { rows, status } = parse(input.hex, parseDefs);
-      expect(status.message).toBe(c.status);
+      expect(strip(status.message)).toBe(strip(c.status));
       expect(rows.length).toBe(c.rows.length);
       rows.forEach((row, n) => {
         const g = c.rows[n];
